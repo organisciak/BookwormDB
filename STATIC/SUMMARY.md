@@ -1,10 +1,11 @@
 # Summary
 
 * [Building a Bookworm](Building.md)
+    * [Configuring MySQL and Apache](MySQL.md)
     * [Required Files](Requirements.md)
     * [input.txt](input.txt.md)
-    * [The jsoncatalog.txt](jsoncatalog.txt.md)
-    * [field_descriptions.json](field_descriptions.md)
+    * [The jsoncatalog.txt](JSONcatalog.md)
+    * [field_descriptions.json](field_descriptions.json.md)
 * [Defining a Token](Tokens.md)
 * [The API] (API.md)
 * [Web Front Ends](Websites.md)

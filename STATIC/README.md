@@ -18,6 +18,8 @@ Bookworm was initially developed at the Harvard Cultural Observatory, founded by
 
 Major early contributions were made by Martin Camacho, Billy Janitsch, Neva Cherniavsky, Erez Aiden, Ben Schmidt, Matt Nicklay, and JB Michel.
 
+Funding and institutional supported has been provided by the Harvard Cultural Observatory, the Digital Public Library of America, Northeastern University, and Rice University.
+
 ## Styleguide
 
 I'm going to try to use `Bookworm` (capitalized) to refer to the project as a whole and the overall project, and `bookworm` (lowercase) as a way to describe individual installations.
