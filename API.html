@@ -3,7 +3,7 @@
     <head prefix="og: http://ogp.me/ns# book: http://ogp.me/ns/book#">
         
         <meta charset="UTF-8">
-        <title>Building a Bookworm | Introduction</title>
+        <title>The Bookworm API | Introduction</title>
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="robots" content="index, follow">
@@ -13,13 +13,13 @@
         <meta name="generator" content="www.gitbook.io">
 
         
-        <link rel="next" href="./MySQL.html" />
+        <link rel="next" href="./Websites.html" />
         
         
-        <link rel="prev" href="./index.html" />
+        <link rel="prev" href="./Tokens.html" />
         
 
-        <meta property="og:title" content="Building a Bookworm | Introduction">
+        <meta property="og:title" content="The Bookworm API | Introduction">
         <meta property="og:site_name" content="Introduction">
         <meta property="og:type" content="book">
         <meta property="og:locale" content="en_US">
@@ -42,7 +42,7 @@
 
 
         
-    <div class="book" data-github="bmschmidt/Presidio" data-level="1" data-basepath="." data-revision="1398373060935">
+    <div class="book" data-github="bmschmidt/Presidio" data-level="3" data-basepath="." data-revision="1398373060935">
     <div class="book-header">
     <!-- Actions Left -->
     
@@ -105,7 +105,7 @@
             <a href="https://github.com/bmschmidt/Presidio/issues" target="blank">Questions and Issues</a>
         </li>
         <li>
-            <a href="https://github.com/bmschmidt/Presidio/edit/master/Building.md" target="blank">Edit and Contribute</a>
+            <a href="https://github.com/bmschmidt/Presidio/edit/master/API.md" target="blank">Edit and Contribute</a>
         </li>
         <li class="divider"></li>
         
@@ -228,7 +228,7 @@
             <div class="page-wrapper" tabindex="-1">
                 <div class="book-progress">
     <div class="bar">
-        <div class="inner" style="width: 8.333333333333334%;min-width: 0%;"></div>
+        <div class="inner" style="width: 66.66666666666667%;min-width: 58.333333333333336%;"></div>
     </div>
     <div class="chapters">
     
@@ -236,19 +236,19 @@
     
         <a href="./Building.html" title="Building a Bookworm" class="chapter done new-chapter" data-progress="1" style="left: 8.333333333333334%;"></a>
     
-        <a href="./MySQL.html" title="Configuring MySQL and Apache" class="chapter  " data-progress="1.1" style="left: 16.666666666666668%;"></a>
+        <a href="./MySQL.html" title="Configuring MySQL and Apache" class="chapter done " data-progress="1.1" style="left: 16.666666666666668%;"></a>
     
-        <a href="./Requirements.html" title="Required Files" class="chapter  " data-progress="1.2" style="left: 25%;"></a>
+        <a href="./Requirements.html" title="Required Files" class="chapter done " data-progress="1.2" style="left: 25%;"></a>
     
-        <a href="./input.txt.html" title="input.txt" class="chapter  " data-progress="1.3" style="left: 33.333333333333336%;"></a>
+        <a href="./input.txt.html" title="input.txt" class="chapter done " data-progress="1.3" style="left: 33.333333333333336%;"></a>
     
-        <a href="./JSONcatalog.html" title="The jsoncatalog.txt" class="chapter  " data-progress="1.4" style="left: 41.666666666666664%;"></a>
+        <a href="./JSONcatalog.html" title="The jsoncatalog.txt" class="chapter done " data-progress="1.4" style="left: 41.666666666666664%;"></a>
     
-        <a href="./field_descriptions.json.html" title="field_descriptions.json" class="chapter  " data-progress="1.5" style="left: 50%;"></a>
+        <a href="./field_descriptions.json.html" title="field_descriptions.json" class="chapter done " data-progress="1.5" style="left: 50%;"></a>
     
-        <a href="./Tokens.html" title="Defining a Token" class="chapter  new-chapter" data-progress="2" style="left: 58.333333333333336%;"></a>
+        <a href="./Tokens.html" title="Defining a Token" class="chapter done new-chapter" data-progress="2" style="left: 58.333333333333336%;"></a>
     
-        <a href="./API.html" title="The Bookworm API" class="chapter  new-chapter" data-progress="3" style="left: 66.66666666666667%;"></a>
+        <a href="./API.html" title="The Bookworm API" class="chapter done new-chapter" data-progress="3" style="left: 66.66666666666667%;"></a>
     
         <a href="./Websites.html" title="Web Front Ends" class="chapter  new-chapter" data-progress="4" style="left: 75%;"></a>
     
@@ -263,80 +263,12 @@
 
                 <div class="page-inner">
                 
-                    <section class="normal" id="section-gitbook_8">
+                    <section class="normal" id="section-gitbook_2">
                     
-                        <h1 id="building-a-bookworm">Building a Bookworm</h1>
-<h2 id="system-software-requirements">System/software Requirements</h2>
-<h4 id="operating-system-">Operating System:</h4>
-<p>Bookworm installations are best tuned for recent versions of Ubuntu. Development versions are also maintained on Mac OS X. Other Unixes should be usable without much trouble: some files for configuring CentOS are included in the distribution, although they may be out of date. Windows is out of the queston.</p>
-<h4 id="software-dependencies-">Software Dependencies:</h4>
-<ul>
-<li>MySQL 5.6 or later.<ul>
-<li>MySQL 5.5 will work in most cases, but will not be supported going forward and make break with future updates.</li>
-</ul>
-</li>
-<li>Python 2.7, with certain modules:<ul>
-<li>regex</li>
-<li>nltk
-*</li>
-</ul>
-</li>
-<li>GNU parallel</li>
-<li>Apache2 (or another web server of your choice.)</li>
-</ul>
-<h2 id="hardware-requirements">Hardware requirements</h2>
-<h3 id="ram">RAM</h3>
-<p>Bookworm queries run fast because large amounts of memory is stored in memory. With some tweaking, one can create a disk-based Bookworm; these are not supported by default because they tend to be signficantly slower.</p>
-<p>So, how much RAM does Bookworm need?</p>
-<p>4GB, let&#39;s say? There may be problems with lots of processors and low RAM; in these cases, the line in the Makefile setting the parallel chunk size.</p>
-<p>A running installations also stores a number of files in memory. Several different bookworms running simultaneously on a server might take up a few gigs of memory; it&#39;s not the sort of thing you can serve off an old laptop or an AWS micro instance.</p>
-<h3 id="hard-drive-space">Hard Drive space</h3>
-<p>The other reason for Bookworm&#39;s speed at present is a number of B-tree indexes on every possible phrase that a user might search for. This is a very disk-consuming sort of storage, so bookworms frequently take up significantly more space than the texts fed into them.</p>
-<p>Intermediate creation take up quite a bit of space in most Bookworm repos, though less than in earlier versions.</p>
-<p>So, how much disk space does Bookworm need?</p>
-<p>Bookworm is quite disk-space intensive, to get the fastest possible lookups on the user end. I&#39;ll give an absolute worse-case scenario to test the limits here. If you&#39;re doing texts that are larger than these (here, the average text length is 43 words), the bloat will not be so bad. (Because the number of <strong>distinct</strong> words in the text increases as log(n), where n is the number of words in the text).</p>
-<p><strong>As an upper limit,</strong> take one very metadata-heavy corpus: each text is under a paragraph long with about 14 million texts. This means that the Bookworm file stroage will be at its worse; the tokenized wordcounts will usually be longer than the original documents, which is very rarely the case.</p>
-<h2 id="for-a-build-">For a build.</h2>
-<p>The pure text files are 3 gigabytes: the intermediary files take up 56GB altogether. THe largest are the metadata (which in this case includes a couple different copies of each individual text); next are the binaries and the encoded load files, at about 5x the original files.</p>
-<pre><code>2.8G input.txt
-14G     files/texts/encoded
-16G     files/texts/binaries
-23G     files/metadata
-229M     files/texts/textids
-114M     files/texts/wordlist
-118M     files/texts/binaries/completed
-33G     files/texts
-56G     files
-</code></pre><h2 id="plus-the-database-">Plus the database.</h2>
-<p>The database itself, if on the same machine, is another 42GB; and because MySQL needs scratch spaces for indexes, this particular example would need another 15GB available as scratch.</p>
-<h2 id="for-final-storage">For final storage</h2>
-<p>The final database takes up 42 GB. The largest files are the unigram <strong>indexes</strong>, which are 3x the size of the unigram <strong>words</strong>.</p>
-<pre><code>-rw-rw---- 1 mysql mysql  13G Apr 16 17:42 master_bookcounts.MYI
--rw-rw---- 1 mysql mysql 9.3G Apr 16 17:54 master_bigrams.MYI
--rw-rw---- 1 mysql mysql 6.5G Apr 16 17:45 master_bigrams.MYD
--rw-rw---- 1 mysql mysql 4.9G Apr 16 21:30 catalog.MYD
--rw-rw---- 1 mysql mysql 4.1G Apr 16 17:33 master_bookcounts.MYD
--rw-rw---- 1 mysql mysql 4.0G Apr 18 13:26 catalog.MYI
--rw-rw---- 1 mysql mysql 115M Apr 18 13:26 nwords.MYI
--rw-rw---- 1 mysql mysql  99M Apr 16 18:07 nwords.MYD
--rw-rw---- 1 mysql mysql  43M Apr 16 17:31 words.MYD
-</code></pre><h2 id="is-this-too-much-">Is this too much?</h2>
-<p>The structuring principle here has been that hard drive space is cheap, and user speed matters. There are a lot of optimizations possible that may slightly increase build time, but require susbstantially less space in the build. For the final storage, the ratio is different.</p>
-<h2 id="understanding-the-workflow-">Understanding the Workflow.</h2>
-<p>All jobs are dispatched through the Makefile--if you can read through the dependency chain to see how it&#39;s put together, you&#39;ll understand all the elements.</p>
-<p>For reference, the general workflow of the Makefile is the following:</p>
-<ol>
-<li>Build the directory structure in <code>files/texts/</code>.</li>
-<li>Derive <code>files/metadata/field_descriptions_derived.json</code> from <code>files/metadata/field_descriptions.json</code>.</li>
-<li>Derive <code>files/metadata/jsoncatalog_derived.txt</code> from <code>files/metadata/jsoncatalog.txt</code>.</li>
-<li>Create metadata catalog files in <code>files/metadata/</code>.</li>
-<li>Tokenize unigrams and bigrams and save them to binary files.</li>
-<li>Create a table with all words from the binaries, and save the million most common for regular use.</li>
-<li>Encode unigrams and bigrams from the binaries into <code>files/encoded</code></li>
-<li>Load data into MySQL database.</li>
-<li>Create temporary MySQL table and .json file that will be used by the web app.</li>
-<li>Create API settings.</li>
-</ol>
+                        <h1 id="the-bookworm-api">The Bookworm API</h1>
+<p>The Bookworm API acts as an interchange format for requesting data about large collections of texts.</p>
+<p>The orthodox implementation at the time of writing is <a href="github.com/bmschmidt/BookwormAPI">my BookwormAPI repository</a>, written in Python and connecting to scripts</p>
+<p>One of the major advantages of the API, however, is that it can be implemented on top of other systems (in whole or in part); so that bookcounts queries can easily be run through Solr, for example.</p>
 
                     
                     </section>
@@ -346,10 +278,10 @@
         </div>
 
         
-        <a href="./index.html" class="navigation navigation-prev"><i class="fa fa-angle-left"></i></a>
+        <a href="./Tokens.html" class="navigation navigation-prev"><i class="fa fa-angle-left"></i></a>
         
         
-        <a href="./MySQL.html" class="navigation navigation-next"><i class="fa fa-angle-right"></i></a>
+        <a href="./Websites.html" class="navigation navigation-next"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>
