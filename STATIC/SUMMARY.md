@@ -7,7 +7,7 @@
     * [The jsoncatalog.txt](JSONcatalog.md)
     * [field_descriptions.json](field_descriptions.json.md)
 * [Defining a Token](Tokens.md)
-* [The API] (API.md)
+* [The Bookworm API](API.md)
 * [Web Front Ends](Websites.md)
 * [The One Click Infrastructure](OneClick.md)
 * [Extensions](Extensions.md)
