@@ -1,4 +1,4 @@
-# Introduction
+# Bookworm
 
 ## What is Bookworm?
 
@@ -23,3 +23,7 @@ Funding and institutional supported has been provided by the Harvard Cultural Ob
 ## Styleguide
 
 I'm going to try to use `Bookworm` (capitalized) to refer to the project as a whole and the overall project, and `bookworm` (lowercase) as a way to describe individual installations.
+
+## Editing this document
+
+You can edit this document by generating a pull request on the `gh-pages` branch of this repository. All edits should be to the Markdown files in the `STATIC` directory: the HTML in the base directory is routinely overwritten.
