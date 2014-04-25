@@ -8,11 +8,10 @@ Bookworm installations are best tuned for recent versions of Ubuntu. Development
 
 #### Software Dependencies:
 * MySQL 5.6 or later.
-    * MySQL 5.5 will work in most cases, but will not be supported going forward and make break with future updates.
-* Python 2.7, with certain modules:
+    * (MySQL 5.5 will work in most cases, but will not be supported going forward and make break with future updates.)
+* Python 2.7, plus the modules:
     * regex
     * nltk
-    *
 * GNU parallel
 * Apache2 (or another web server of your choice.)
 
