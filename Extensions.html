@@ -3,12 +3,12 @@
     <head prefix="og: http://ogp.me/ns# book: http://ogp.me/ns/book#">
         
         <meta charset="UTF-8">
-        <title>Extensions | Introduction</title>
+        <title>Extensions | Bookworm</title>
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="robots" content="index, follow">
         <meta name="author" content="bmschmidt">
-        <meta name="description" content="Bookworm is a platform for interactively exploring massive collections of texts as data.">
+        <meta name="description" content="Bookworm makes it easy to interactively explore massive collections of texts as data.">
         <meta name="keywords" content="gitbook,github" >
         <meta name="generator" content="www.gitbook.io">
 
@@ -19,8 +19,8 @@
         <link rel="prev" href="./OneClick.html" />
         
 
-        <meta property="og:title" content="Extensions | Introduction">
-        <meta property="og:site_name" content="Introduction">
+        <meta property="og:title" content="Extensions | Bookworm">
+        <meta property="og:site_name" content="Bookworm">
         <meta property="og:type" content="book">
         <meta property="og:locale" content="en_US">
 
@@ -42,7 +42,7 @@
 
 
         
-    <div class="book" data-github="bmschmidt/Presidio" data-level="6" data-basepath="." data-revision="1398442579464">
+    <div class="book" data-github="bmschmidt/Presidio" data-level="6" data-basepath="." data-revision="1398445044244">
     <div class="book-header">
     <!-- Actions Left -->
     
@@ -89,7 +89,7 @@
     
 
     <!-- Title -->
-    <h1><a href="./" >Introduction</a></h1>
+    <h1><a href="./" >Bookworm</a></h1>
 </div>
 
     <div class="book-summary">
@@ -263,7 +263,7 @@
 
                 <div class="page-inner">
                 
-                    <section class="normal" id="section-gitbook_3">
+                    <section class="normal" id="section-gitbook_4">
                     
                         <h1 id="extensions">Extensions</h1>
 <p>There are a lot of logical ways to extend out Bookworm to work with established tools. We want to make this easy without requiring enormous bloat.</p>
@@ -277,10 +277,22 @@
 <li>Currently, it doesn&#39;t filter for stopwords, which is mathematically justifiable but hurts interpretability.</li>
 <li>Should there be multiple topics run?</li>
 </ol>
+<h3 id="the-bootstrapper-">The Bootstrapper.</h3>
+<p>It&#39;s hard to quantify the error associated with counts over time. We like to treat words as</p>
+<h3 id="geopositioner">Geopositioner</h3>
+<p>Given the name of field that contains place names, add in a longitude-latitude formatted set of places.
+The real trick here is exactly nailing the standard Bookworm format. We&#39;ve used separate Lat,Lon, before, but I now think that&#39;s inefficient.</p>
 <h3 id="geotagger">Geotagger</h3>
-<p>The Geotagger will work by parsing a text using the Stanford NLTK named entity extractor, pulling out persons, locations, and</p>
+<p>The Geotagger will work by parsing a text using the Stanford NLTK named entity extractor, pulling out persons, locations, and entities. The results could then be run through the geopositioner plugin.</p>
 <h2 id="extensions-we-want">Extensions we want</h2>
-<h2 id="-">#</h2>
+<h3 id="the-linked-open-data-interchange-">The Linked Open Data interchange.</h3>
+<p>This would be the most amazing thing possible, and possibly worth building in as core funcationality. In essence: say you have a field <code>author_id</code>, and that corresponds to an identifier on some other page. By using a linked open data interchange, you could simply specify the source and the middle element of an RDF triple, and have the values automatically pulled in by some SPARQL process or something. The use of specific URIs in the <code>field_descriptions.json</code> field would enormously facilitate this.</p>
+<h3 id="serial-killer">Serial Killer</h3>
+<p>Implement the Ngrams serial killer algorithm in Bookworm. Been done once, but might be a nice pocket example of how this can work on the OL/Hathi data.</p>
+<h3 id="university-linker-">University Linker.</h3>
+<p>On my mind because of one Bookworm in particular, but with an academic audience it might be nice to have some pathway to populating texts that contain unstructured text of university names with all the data about universities in ICOADS.</p>
+<h3 id="genderation">Genderation</h3>
+<p>Given a field that contains names (first or complete), add fields to the Bookworm that include gender both as a flat determination and as a probability. Ideally, should take some logic about the birth year of the person into account (19th century Leslies are male, etc.). Could be implemented using my old code, which is a bit more flexible, or Lincoln Mullen&#39;s R package, which I&#39;ve used on one Bookworm.</p>
 
                     
                     </section>
