@@ -1,8 +1,6 @@
 # Defining a Token
 
-Language analysis needs to tokenize words. There's no single tokenization that will please everyone, but we use one that works pretty well on English-language texts from the last 200 years or so.
-
-Bookworm tokenizes using a rather complicated regular expression designed to approximate, as closely as possible, the method used for the 2009 Michel-Aiden Science paper and the accompanying resource, Google Ngrams.
+Language analysis needs to tokenize words. There's no single tokenization that will please everyone, but we use one that works pretty well on English-language texts from the last 200 years or so. It's long, though, and can probably use a few sets of eyes. Plus, there may be a certain type of person who enjoys reading long descriptions of regular expressions. Bookworm tokenizes using a rather complicated regular expression designed to approximate, as closely as possible, the method used for the 2009 Michel-Aiden Science paper and the accompanying resource, Google Ngrams.
 
 We don't use the 2012 methods in the later ngrams corpora because they include a number of strange optimizations, such as [tokenizing "won't" to "will not"](https://books.google.com/ngrams/graph?content=won%27t%2Cwill+not&year_start=1800&year_end=2000&corpus=15&smoothing=3&share=&direct_url=t1%3B%2Cwill%20not%3B%2Cc0%3B.t1%3B%2Cwill%20not%3B%2Cc0).
 
@@ -94,6 +92,12 @@ For example: paste that into python and run:
 
 ```
 re.findall(bigregex,u"Mr. Peña wouldn't pay $24.99 for tickets to the C#-minor quartet, even if his wife's playing.")
+```
+
+For the record, the final regex looks like this. If you want to paste it into another tool, those ?: delimiters may have to go.
+
+```
+(?:[\$£€¥])?\d+(?:,\d\d\d)*\.\d+|(?:[\$£€¥])?\d+(?:,\d\d\d)*|(?:mr|ms|mrs|dr|prof|rev|rep|sen|st|sr|jr|ft|gen|adm|lt|col|etc)\.|\p{L}+'s|\p{L}+n't|[a-gjxA-GJX]#|[^\p{L}\p{Z}]|\p{L}+
 ```
 
 ## Case sensitivity.

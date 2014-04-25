@@ -42,7 +42,7 @@
 
 
         
-    <div class="book" data-github="bmschmidt/Presidio" data-level="2" data-basepath="." data-revision="1398445044244">
+    <div class="book" data-github="bmschmidt/Presidio" data-level="2" data-basepath="." data-revision="1398449753578">
     <div class="book-header">
     <!-- Actions Left -->
     
@@ -266,8 +266,7 @@
                     <section class="normal" id="section-gitbook_10">
                     
                         <h1 id="defining-a-token">Defining a Token</h1>
-<p>Language analysis needs to tokenize words. There&#39;s no single tokenization that will please everyone, but we use one that works pretty well on English-language texts from the last 200 years or so.</p>
-<p>Bookworm tokenizes using a rather complicated regular expression designed to approximate, as closely as possible, the method used for the 2009 Michel-Aiden Science paper and the accompanying resource, Google Ngrams.</p>
+<p>Language analysis needs to tokenize words. There&#39;s no single tokenization that will please everyone, but we use one that works pretty well on English-language texts from the last 200 years or so. It&#39;s long, though, and can probably use a few sets of eyes. Plus, there may be a certain type of person who enjoys reading long descriptions of regular expressions. Bookworm tokenizes using a rather complicated regular expression designed to approximate, as closely as possible, the method used for the 2009 Michel-Aiden Science paper and the accompanying resource, Google Ngrams.</p>
 <p>We don&#39;t use the 2012 methods in the later ngrams corpora because they include a number of strange optimizations, such as <a href="https://books.google.com/ngrams/graph?content=won%27t%2Cwill+not&amp;year_start=1800&amp;year_end=2000&amp;corpus=15&amp;smoothing=3&amp;share=&amp;direct_url=t1%3B%2Cwill%20not%3B%2Cc0%3B.t1%3B%2Cwill%20not%3B%2Cc0" target="_blank">tokenizing &quot;won&#39;t&quot; to &quot;will not&quot;</a>.</p>
 <p>The full regular expression is defined in the python code as the following (as of April 20014).</p>
 <p>This requires the python <code>regex</code> module to support unicode regular expression phrases such as <code>\p{L}</code> (which matches any unicode letter in any language, and forms the basis for the codes below).</p>
@@ -315,6 +314,8 @@ bigregex = re.compile(&quot;|&quot;.join([decimals,numbers,abbreviation,possessi
 </code></pre>
 <p>For example: paste that into python and run:</p>
 <pre><code>re.findall(bigregex,u&quot;Mr. Peña wouldn&#39;t pay $24.99 for tickets to the C#-minor quartet, even if his wife&#39;s playing.&quot;)
+</code></pre><p>For the record, the final regex looks like this. If you want to paste it into another tool, those ?: delimiters may have to go.</p>
+<pre><code>(?:[\$£€¥])?\d+(?:,\d\d\d)*\.\d+|(?:[\$£€¥])?\d+(?:,\d\d\d)*|(?:mr|ms|mrs|dr|prof|rev|rep|sen|st|sr|jr|ft|gen|adm|lt|col|etc)\.|\p{L}+&#39;s|\p{L}+n&#39;t|[a-gjxA-GJX]#|[^\p{L}\p{Z}]|\p{L}+
 </code></pre><h2 id="case-sensitivity-">Case sensitivity.</h2>
 <p>Search engines are generally case insensitive and frequently include stemming. There are good reasons to do this, but they make some important but precise queries impossible.</p>
 <p>Bookworm tokens are defined as unique by their case, but in building the database a lowercase copy of each is also stored; users can choose the collation they want by setting <code>words_collation</code> in the API call.</p>
