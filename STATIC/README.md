@@ -20,6 +20,10 @@ Major contributions between 2011-2013 were made by Martin Camacho, Billy Janitsc
 
 Funding and institutional supported has been provided by the Harvard Cultural Observatory, the Digital Public Library of America, Northeastern University, and Rice University.
 
+## What's in this book
+
+The first half of this is nuts-and-bolts instructions for building a bookworm: the second half is background and specifications to understand the architecture, to use the API, and to extend the functionality of a Bookworm.
+
 ## Styleguide
 
 I'm going to try to use `Bookworm` (capitalized) to refer to the project as a whole and the overall project, and `bookworm` (lowercase) as a way to describe individual installations.

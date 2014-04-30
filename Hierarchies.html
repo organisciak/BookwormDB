@@ -3,7 +3,7 @@
     <head prefix="og: http://ogp.me/ns# book: http://ogp.me/ns/book#">
         
         <meta charset="UTF-8">
-        <title>Web Front Ends | Bookworm</title>
+        <title>Adding Hierarchical Data | Bookworm</title>
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="robots" content="index, follow">
@@ -13,13 +13,13 @@
         <meta name="generator" content="www.gitbook.io">
 
         
-        <link rel="next" href="./OneClick.html" />
+        <link rel="next" href="./API.html" />
         
         
-        <link rel="prev" href="./Tokens.html" />
+        <link rel="prev" href="./Running.html" />
         
 
-        <meta property="og:title" content="Web Front Ends | Bookworm">
+        <meta property="og:title" content="Adding Hierarchical Data | Bookworm">
         <meta property="og:site_name" content="Bookworm">
         <meta property="og:type" content="book">
         <meta property="og:locale" content="en_US">
@@ -42,7 +42,7 @@
 
 
         
-    <div class="book" data-github="bmschmidt/Presidio" data-level="5" data-basepath="." data-revision="1398883965201">
+    <div class="book" data-github="bmschmidt/Presidio" data-level="2" data-basepath="." data-revision="1398883965201">
     <div class="book-header">
     <!-- Actions Left -->
     
@@ -105,7 +105,7 @@
             <a href="https://github.com/bmschmidt/Presidio/issues" target="blank">Questions and Issues</a>
         </li>
         <li>
-            <a href="https://github.com/bmschmidt/Presidio/edit/master/Websites.md" target="blank">Edit and Contribute</a>
+            <a href="https://github.com/bmschmidt/Presidio/edit/master/Hierarchies.md" target="blank">Edit and Contribute</a>
         </li>
         <li class="divider"></li>
         
@@ -245,7 +245,7 @@
             <div class="page-wrapper" tabindex="-1">
                 <div class="book-progress">
     <div class="bar">
-        <div class="inner" style="width: 78.57142857142857%;min-width: 71.42857142857143%;"></div>
+        <div class="inner" style="width: 57.142857142857146%;min-width: 50%;"></div>
     </div>
     <div class="chapters">
     
@@ -267,11 +267,11 @@
     
         <a href="./Hierarchies.html" title="Adding Hierarchical Data" class="chapter done new-chapter" data-progress="2" style="left: 57.142857142857146%;"></a>
     
-        <a href="./API.html" title="The Bookworm API" class="chapter done new-chapter" data-progress="3" style="left: 64.28571428571429%;"></a>
+        <a href="./API.html" title="The Bookworm API" class="chapter  new-chapter" data-progress="3" style="left: 64.28571428571429%;"></a>
     
-        <a href="./Tokens.html" title="Defining a Token" class="chapter done new-chapter" data-progress="4" style="left: 71.42857142857143%;"></a>
+        <a href="./Tokens.html" title="Defining a Token" class="chapter  new-chapter" data-progress="4" style="left: 71.42857142857143%;"></a>
     
-        <a href="./Websites.html" title="Web Front Ends" class="chapter done new-chapter" data-progress="5" style="left: 78.57142857142857%;"></a>
+        <a href="./Websites.html" title="Web Front Ends" class="chapter  new-chapter" data-progress="5" style="left: 78.57142857142857%;"></a>
     
         <a href="./OneClick.html" title="The One Click Infrastructure" class="chapter  new-chapter" data-progress="6" style="left: 85.71428571428571%;"></a>
     
@@ -284,10 +284,22 @@
 
                 <div class="page-inner">
                 
-                    <section class="normal" id="section-gitbook_13">
+                    <section class="normal" id="section-gitbook_5">
                     
-                        <h1 id="chapter-3-web-front-ends">Chapter 3: Web Front Ends</h1>
-
+                        <h1 id="adding-hierarchical-data">Adding Hierarchical Data</h1>
+<p>For understanding patterns, it&#39;s incredibly useful to be able to easily and quickly aggregate.</p>
+<p>Suppose you&#39;re looking at texts you have classified at the level of their &quot;county.&quot;</p>
+<p>There are a lot of different ways you could store this information:</p>
+<pre><code>county
+    |
+    state
+        |
+        census region
+    |
+    urban, rural, or suburban
+    |
+    winner in 2012 presidential election
+</code></pre>
                     
                     </section>
                 
@@ -296,10 +308,10 @@
         </div>
 
         
-        <a href="./Tokens.html" class="navigation navigation-prev"><i class="fa fa-angle-left"></i></a>
+        <a href="./Running.html" class="navigation navigation-prev"><i class="fa fa-angle-left"></i></a>
         
         
-        <a href="./OneClick.html" class="navigation navigation-next"><i class="fa fa-angle-right"></i></a>
+        <a href="./API.html" class="navigation navigation-next"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>
