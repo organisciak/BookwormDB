@@ -6,7 +6,7 @@
     * [input.txt](input.txt.md)
     * [The jsoncatalog.txt](JSONcatalog.md)
     * [field_descriptions.json](field_descriptions.json.md)
-    * Running the script
+    * [Running the script](Running.md)
 * [Defining a Token](Tokens.md)
 * [The Bookworm API](API.md)
 * [Web Front Ends](Websites.md)

@@ -3,7 +3,7 @@
     <head prefix="og: http://ogp.me/ns# book: http://ogp.me/ns/book#">
         
         <meta charset="UTF-8">
-        <title>The One Click Infrastructure | Bookworm</title>
+        <title>Running the script | Bookworm</title>
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="robots" content="index, follow">
@@ -13,13 +13,13 @@
         <meta name="generator" content="www.gitbook.io">
 
         
-        <link rel="next" href="./Extensions.html" />
+        <link rel="next" href="./Tokens.html" />
         
         
-        <link rel="prev" href="./Websites.html" />
+        <link rel="prev" href="./field_descriptions.json.html" />
         
 
-        <meta property="og:title" content="The One Click Infrastructure | Bookworm">
+        <meta property="og:title" content="Running the script | Bookworm">
         <meta property="og:site_name" content="Bookworm">
         <meta property="og:type" content="book">
         <meta property="og:locale" content="en_US">
@@ -42,7 +42,7 @@
 
 
         
-    <div class="book" data-github="bmschmidt/Presidio" data-level="5" data-basepath="." data-revision="1398877955883">
+    <div class="book" data-github="bmschmidt/Presidio" data-level="1.6" data-basepath="." data-revision="1398877955883">
     <div class="book-header">
     <!-- Actions Left -->
     
@@ -105,7 +105,7 @@
             <a href="https://github.com/bmschmidt/Presidio/issues" target="blank">Questions and Issues</a>
         </li>
         <li>
-            <a href="https://github.com/bmschmidt/Presidio/edit/master/OneClick.md" target="blank">Edit and Contribute</a>
+            <a href="https://github.com/bmschmidt/Presidio/edit/master/Running.md" target="blank">Edit and Contribute</a>
         </li>
         <li class="divider"></li>
         
@@ -236,7 +236,7 @@
             <div class="page-wrapper" tabindex="-1">
                 <div class="book-progress">
     <div class="bar">
-        <div class="inner" style="width: 84.61538461538461%;min-width: 76.92307692307692%;"></div>
+        <div class="inner" style="width: 53.84615384615385%;min-width: 46.15384615384615%;"></div>
     </div>
     <div class="chapters">
     
@@ -256,13 +256,13 @@
     
         <a href="./Running.html" title="Running the script" class="chapter done " data-progress="1.6" style="left: 53.84615384615385%;"></a>
     
-        <a href="./Tokens.html" title="Defining a Token" class="chapter done new-chapter" data-progress="2" style="left: 61.53846153846154%;"></a>
+        <a href="./Tokens.html" title="Defining a Token" class="chapter  new-chapter" data-progress="2" style="left: 61.53846153846154%;"></a>
     
-        <a href="./API.html" title="The Bookworm API" class="chapter done new-chapter" data-progress="3" style="left: 69.23076923076923%;"></a>
+        <a href="./API.html" title="The Bookworm API" class="chapter  new-chapter" data-progress="3" style="left: 69.23076923076923%;"></a>
     
-        <a href="./Websites.html" title="Web Front Ends" class="chapter done new-chapter" data-progress="4" style="left: 76.92307692307692%;"></a>
+        <a href="./Websites.html" title="Web Front Ends" class="chapter  new-chapter" data-progress="4" style="left: 76.92307692307692%;"></a>
     
-        <a href="./OneClick.html" title="The One Click Infrastructure" class="chapter done new-chapter" data-progress="5" style="left: 84.61538461538461%;"></a>
+        <a href="./OneClick.html" title="The One Click Infrastructure" class="chapter  new-chapter" data-progress="5" style="left: 84.61538461538461%;"></a>
     
         <a href="./Extensions.html" title="Extensions" class="chapter  new-chapter" data-progress="6" style="left: 92.3076923076923%;"></a>
     
@@ -273,11 +273,35 @@
 
                 <div class="page-inner">
                 
-                    <section class="normal" id="section-gitbook_7">
+                    <section class="normal" id="section-gitbook_10">
                     
-                        <h1 id="the-one-click-infrastructure">The One Click Infrastructure</h1>
-<p>Not everyone has a web server sitting around, or the ability to maintain a big MySQL installation.</p>
-<p>Rice maintains an online infrastructure to let you build or test a bookworm without setting it all up on your local machine. See <a href="bookworm.culturomics.org">the bookworm website</a> for more details and instructions.</p>
+                        <h1 id="running-the-script">Running the script</h1>
+<p>The central creation for a Bookworm is handled by a Makefile.</p>
+<p>The easiest way to create a Bookworm is simply to make sure you have stored the files as described above at:</p>
+<ol>
+<li><code>files/texts/input.txt</code> (or a number of files at <code>files/texts/raw</code></li>
+<li><code>files/metadata/jsoncatalog.txt</code></li>
+<li><code>files/metadata/field_descriptions.json</code></li>
+</ol>
+<p>Once this is done, simply run <code>make</code>. The first time you do this, it will prompt you for the name of the Bookworm, username, and password to build; then it will run through all the data and build the Bookworm in place.</p>
+<p>The bookworm is the name of the database (and the website): it can&#39;t include spaces.</p>
+<p>The username and password <strong>are not your personal username and password</strong>. They are, instead, a default username and password that the web site will use. This is for an extra layer of security; all Bookworm queries are performed by a user with no privileges to change the database. In general, the right place to store this is at your <strong>system-level</strong> <code>my.cnf</code> file. (It may be located somewhere like <code>/etc/my.cnf</code> on OS X, or <code>/etc/mysql/my.cnf</code> on Ubuntu.) These must be the same as the username and password that Apache will use when executing a CGI script.</p>
+<h2 id="understanding-the-workflow-">Understanding the Workflow.</h2>
+<p>All jobs are dispatched through the Makefile--if you can read through the dependency chain to see how it&#39;s put together, you&#39;ll understand all the elements.</p>
+<p>For reference, the general workflow of the Makefile is the following:</p>
+<ol>
+<li>Build the directory structure in <code>files/texts/</code>.</li>
+<li>Derive <code>files/metadata/field_descriptions_derived.json</code> from <code>files/metadata/field_descriptions.json</code>.</li>
+<li>Derive <code>files/metadata/jsoncatalog_derived.txt</code> from <code>files/metadata/jsoncatalog.txt</code>.</li>
+<li>Create metadata catalog files in <code>files/metadata/</code>.</li>
+<li>Create, if not pre-defined, a file at <code>files/wordlist/wordlist.txt</code> that defines the tokens that will be counted (the million most common tokens).</li>
+<li>Encode unigrams and bigrams from the binaries into <code>files/encoded</code>.</li>
+<li>Load wordcounts into MySQL database.</li>
+<li>Load metadata into MySQL database.</li>
+<li>Create temporary MySQL table and .json file that will be used by the web app.</li>
+<li>Create API settings.</li>
+</ol>
+<p>At any point, you can backtrack part of the way by clearing out files from <code>files/targets</code>.</p>
 
                     
                     </section>
@@ -287,10 +311,10 @@
         </div>
 
         
-        <a href="./Websites.html" class="navigation navigation-prev"><i class="fa fa-angle-left"></i></a>
+        <a href="./field_descriptions.json.html" class="navigation navigation-prev"><i class="fa fa-angle-left"></i></a>
         
         
-        <a href="./Extensions.html" class="navigation navigation-next"><i class="fa fa-angle-right"></i></a>
+        <a href="./Tokens.html" class="navigation navigation-next"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>

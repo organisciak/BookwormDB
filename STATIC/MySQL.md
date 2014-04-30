@@ -11,6 +11,11 @@ Bookworm uses a heavily customized my.cnf file for MySQL, though, in order to fa
 
 There are some scripts located in `setup/MySQLsetup/` that rewrite your configuration file to include the specifications; back up your old my.cnf file first, because it will be rewritten. (And you'll lose things like comments). You can also make the changes by hand.
 
+You'll also need to set up mysql so that you can create tables. The best way to test this is to do the following. First, in the shell type `mysql`. That should log you on. (If you have problems here, you may need to edit your `~/.my.cnf` file.) Then in MySQL type:
 
+``` {SQL}
+CREATE DATABASE testing123;
+DROP DATABASE testing123;
+```
 
-
+If those fail, you don't have appropriate privileges to use MySQL on your server.
