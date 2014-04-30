@@ -1,5 +1,11 @@
 # Building a Bookworm
 
+Building a Bookworm requires a working knowledge of the command line, the ability to install software packages, and (generally) root access to the machine you're working with.
+
+From a sysadmin perspective, it's about the same difficulty as installing a working version of Wordpress on your local machine. If that sounds onerous, you might want to [try the free hosting provided by the Rice Cultural Observatory](http://bookworm.culturomics.org) or get in touch with us to find someone who can set up a private server on Amazon for you.
+
+
+
 ## System/software Requirements
 
 #### Operating System:

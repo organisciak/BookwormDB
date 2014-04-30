@@ -13,8 +13,6 @@
         <meta name="generator" content="www.gitbook.io">
 
         
-        <link rel="next" href="./Tokens.html" />
-        
         
         <link rel="prev" href="./JSONcatalog.html" />
         
@@ -42,7 +40,7 @@
 
 
         
-    <div class="book" data-github="bmschmidt/Presidio" data-level="1.5" data-basepath="." data-revision="1398449753578">
+    <div class="book" data-github="bmschmidt/Presidio" data-level="1.5" data-basepath="." data-revision="1398876210010">
     <div class="book-header">
     <!-- Actions Left -->
     
@@ -162,6 +160,12 @@
                             
                         </li>
                     
+                        <li  data-level="1.6" >
+                            
+                            <span><b>1.6.</b> Running the script</span>
+                            
+                        </li>
+                    
                 </ul>
                 
             </li>
@@ -266,7 +270,22 @@
                     <section class="normal" id="section-gitbook_12">
                     
                         <h1 id="-field_descriptions-json-"><code>field_descriptions.json</code></h1>
-<p>The <code>field_descriptions.json</code> file is metadata about the metadata.</p>
+<p>The <code>field_descriptions.json</code> file is metadata about the metadata. This defines how the keys in <code>jsoncatalog.txt</code> will be interpreted. Not all data you put in will have the same purpose. Some fields (like <code>policalParty</code> or <code>subject</code>) will be <strong>categorical</strong> elements suitable for choosing from a dropdown menu; others (like <code>publish_year</code> or <code>authorBirthYear</code>) will be time variables you&#39;ll want to display on the X axis; yet others (like <code>authorName</code>) might be fields you want to allow in searches, but which web users would never see as a full list. This file is where you.</p>
+<h3 id="the-automatic-guesser">The automatic guesser</h3>
+<p>If you don&#39;t enter in a field_descriptions.json, Bookworm will simply guess based on the name and layout of the fields what kind of data is stored in them. There&#39;s a really good chance this will fail, so don&#39;t rely on it very heavily.</p>
+<p>But see the chapter of &quot;Future Plans&quot; below for one option to use field names from a defined ontology (like Dublin Core) to automatically handle data.</p>
+<h3 id="constraints-on-field-names">Constraints on field names</h3>
+<p>Bookworm creation may fail and throw an error if put in a key name that does any of the following things:</p>
+<ul>
+<li>Contains any character besides the 26 English letters and the underscore <code>([A-Za-z_])+</code></li>
+<li>Is the same as the name of a MySQL reserved word, such as:<ul>
+<li>field</li>
+<li>group</li>
+<li>in</li>
+<li>limit</li>
+</ul>
+</li>
+</ul>
 <h3 id="future-options">Future options</h3>
 <p>Here is an example of the <code>field_descriptions.json</code> file from the Open Library Bookworm:</p>
 <pre><code class="lang-{js}">[
@@ -297,8 +316,6 @@
         
         <a href="./JSONcatalog.html" class="navigation navigation-prev"><i class="fa fa-angle-left"></i></a>
         
-        
-        <a href="./Tokens.html" class="navigation navigation-next"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>
