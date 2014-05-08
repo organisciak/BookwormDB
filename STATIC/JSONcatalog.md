@@ -4,8 +4,10 @@ The input for the `jsoncatalog.txt` file contains one JSON object per line. The 
 
 In addition to the metadata you choose, two fields are required:
 
-1. A `searchstring` field that contains valid HTML which will be served to the user to identify the text.
-   * This can be a link, or simply a description of the field. If you have a URL where the text can be read, it's best to include it inside an `<a>` tag: otherwise, you can just put in any text field you want in the process of creating the jsoncatalog.txt file: something like author and title is good.
+1. A `searchstring` field that contains valid HTML which will be served to the user to identify the text. This can be a link, or simply a description of the field.
+    * If you have a URL where the text can be read, it's best to include it inside an `<a>` tag: that lets users actually read the text, which is kind of the point here.
+    * If the texts are very small (less than a paragraph apiece, say), you might just paste the entire text into the searchstring so users can read them on the search.
+    * Otherwise, you can just put in any text field you want in the process of creating the jsoncatalog.txt file: something like author and title is good.
 
 2. A `filename` field that includes a unique identifier for the document (linked to the filename or the identifier, depending on your input format).
 

@@ -1,10 +1,16 @@
 # Extensions
 
-There are a lot of logical ways to extend out Bookworm to work with established tools. We want to make this easy without requiring enormous bloat.
+There are a lot of logical ways to extend out Bookworm to work with established tools. We want to make this easy without requiring enormous bloat in the core package.
 
 ## Installing/creating extensions.
 
-The /extensions folder in a Bookworm
+The /extensions folder in a Bookworm is not created by default, but can be filled with folders; each folder is an installed extension.
+
+Each extension should be a git repository that can be cloned into that extensions location. The single command `make` run in that directory should run the build; it's permissible for an extension to require command-line input.
+
+That directory location means it will have access to your local bookworm configuration and other information. For example: once the geotagger builds its own metadata file,
+```cd ../..; python OneClick.py supplementMetadataFromJSON extensions/geotagger/metadata.txt filename```
+
 
 
 ## Existing/under development Extensions
@@ -48,4 +54,18 @@ On my mind because of one Bookworm in particular, but with an academic audience 
 ### Genderation
 
 Given a field that contains names (first or complete), add fields to the Bookworm that include gender both as a flat determination and as a probability. Ideally, should take some logic about the birth year of the person into account (19th century Leslies are male, etc.). Could be implemented using my old code, which is a bit more flexible, or Lincoln Mullen's R package, which I've used on one Bookworm.
+
+## Strategies for handling data
+
+### Accessing the raw text.
+
+Extensions may access not just the database, but the raw creation files themselves.
+
+Currently, a few extensions access the `input.txt` file. For example, in the geotagger extension:
+```
+metadata.txt:
+	cat ../../files/texts/input.txt | parallel  --block-size 1M --pipe ./tagAChunk.sh > metadata.txt
+```
+
+This is clearly a bad idea, since it will break on other file storage techniques, we need to firmly define the `textStream` protocol for irregular bookworms, though, before this happens.
 

@@ -1,10 +1,12 @@
 # Building a Bookworm
 
+##Overview
+
 Building a Bookworm requires a working knowledge of the command line, the ability to install software packages, and (generally) root access to the machine you're working with.
 
 From a sysadmin perspective, it's about the same difficulty as installing a working version of Wordpress on your local machine. If that sounds onerous, you might want to [try the free hosting provided by the Rice Cultural Observatory](http://bookworm.culturomics.org) or get in touch with us to find someone who can set up a private server on Amazon for you.
 
-
+It also requires, usually, some data munging to get the files into an appropriate format to work with.
 
 ## System/software Requirements
 
@@ -19,6 +21,7 @@ Bookworm installations are best tuned for recent versions of Ubuntu. Development
     * regex
     * nltk
 * GNU parallel
+    * Which throws some extremely obnoxious warnings
 * Apache2 (or another web server of your choice.)
 
 ## Hardware requirements
@@ -27,12 +30,11 @@ Bookworm installations are best tuned for recent versions of Ubuntu. Development
 
 Bookworm queries run fast because large amounts of memory is stored in memory. With some tweaking, one can create a disk-based Bookworm; these are not supported by default because they tend to be signficantly slower.
 
-So, how much RAM does Bookworm need?
+How much RAM does Bookworm need?
 
-4GB, let's say? There may be problems with lots of processors and low RAM; in these cases, the line in the Makefile setting the parallel chunk size.
+It depends on a lot of things: but 4GB, let's say? There may be problems with lots of processors and low RAM; in these cases, the line in the Makefile setting the parallel chunk size.
 
-A running installations also stores a number of files in memory. Several different bookworms running simultaneously on a server might take up a few gigs of memory; it's not the sort of thing you can serve off an old laptop or an AWS micro instance.
-
+A running installations also stores a number of files in memory. Several different bookworms running simultaneously on a server might take up a few gigs of memory. That is to say, you might be able to test it off an old laptop or an AWS micro instance, but you probably don't want to serve it from there.
 
 ### Hard Drive space
 
@@ -62,13 +64,15 @@ The pure text files are 3 gigabytes: the intermediary files take up 56GB altoget
 56G	 files
 ```
 
+The new, unstable `lessDiskSpace` branch gets rid of the documents in files/texts/binaries.
+
 ## Plus the database.
 
 The database itself, if on the same machine, is another 42GB; and because MySQL needs scratch spaces for indexes, this particular example would need another 15GB available as scratch.
 
 ## For final storage
 
-The final database takes up 42 GB. The largest files are the unigram **indexes**, which are 3x the size of the unigram **words**.
+The final database takes up 42 GB. The largest files are the unigram **indexes**, which are 3x the size of the unigram **words**. (That's because under the hood, the index is really two full copies of all the data; one sorted as `bookid,wordid,count` and the other sorted as `wordid,bookid,count`)
 
 ```
 -rw-rw---- 1 mysql mysql  13G Apr 16 17:42 master_bookcounts.MYI
@@ -86,19 +90,4 @@ The final database takes up 42 GB. The largest files are the unigram **indexes**
 
 The structuring principle here has been that hard drive space is cheap, and user speed matters. There are a lot of optimizations possible that may slightly increase build time, but require susbstantially less space in the build. For the final storage, the ratio is different.
 
-## Understanding the Workflow.
 
-All jobs are dispatched through the Makefile--if you can read through the dependency chain to see how it's put together, you'll understand all the elements.
-
-For reference, the general workflow of the Makefile is the following:
-
-5. Build the directory structure in `files/texts/`.
-1. Derive `files/metadata/field_descriptions_derived.json` from `files/metadata/field_descriptions.json`.
-2. Derive `files/metadata/jsoncatalog_derived.txt` from `files/metadata/jsoncatalog.txt`.
-4. Create metadata catalog files in `files/metadata/`.
-6. Tokenize unigrams and bigrams and save them to binary files.
-7. Create a table with all words from the binaries, and save the million most common for regular use.
-8. Encode unigrams and bigrams from the binaries into `files/encoded`
-9. Load data into MySQL database.
-10. Create temporary MySQL table and .json file that will be used by the web app.
-11. Create API settings.

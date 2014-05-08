@@ -42,7 +42,7 @@
 
 
         
-    <div class="book" data-github="bmschmidt/Presidio" data-level="2" data-basepath="." data-revision="1398883965201">
+    <div class="book" data-github="bmschmidt/Presidio" data-level="2" data-basepath="." data-revision="1399558637309">
     <div class="book-header">
     <!-- Actions Left -->
     
@@ -235,6 +235,18 @@
                 </a>
                 
                 
+                <ul class="articles">
+                    
+                        <li  data-level="8.1" data-path="Metaworm.html">
+                            
+                            <a href="./Metaworm.html">
+                                <i class="fa fa-check"></i> <b>8.1.</b> Meta-Bookworm
+                            </a>
+                            
+                        </li>
+                    
+                </ul>
+                
             </li>
         
     </ul>
@@ -245,39 +257,41 @@
             <div class="page-wrapper" tabindex="-1">
                 <div class="book-progress">
     <div class="bar">
-        <div class="inner" style="width: 57.142857142857146%;min-width: 50%;"></div>
+        <div class="inner" style="width: 53.333333333333336%;min-width: 46.666666666666664%;"></div>
     </div>
     <div class="chapters">
     
         <a href="./index.html" title="Introduction" class="chapter done new-chapter" data-progress="0" style="left: 0%;"></a>
     
-        <a href="./Building.html" title="Building a Bookworm" class="chapter done new-chapter" data-progress="1" style="left: 7.142857142857143%;"></a>
+        <a href="./Building.html" title="Building a Bookworm" class="chapter done new-chapter" data-progress="1" style="left: 6.666666666666667%;"></a>
     
-        <a href="./MySQL.html" title="Configuring MySQL and Apache" class="chapter done " data-progress="1.1" style="left: 14.285714285714286%;"></a>
+        <a href="./MySQL.html" title="Configuring MySQL and Apache" class="chapter done " data-progress="1.1" style="left: 13.333333333333334%;"></a>
     
-        <a href="./Requirements.html" title="Required Files" class="chapter done " data-progress="1.2" style="left: 21.428571428571427%;"></a>
+        <a href="./Requirements.html" title="Required Files" class="chapter done " data-progress="1.2" style="left: 20%;"></a>
     
-        <a href="./input.txt.html" title="input.txt" class="chapter done " data-progress="1.3" style="left: 28.571428571428573%;"></a>
+        <a href="./input.txt.html" title="input.txt" class="chapter done " data-progress="1.3" style="left: 26.666666666666668%;"></a>
     
-        <a href="./JSONcatalog.html" title="The jsoncatalog.txt" class="chapter done " data-progress="1.4" style="left: 35.714285714285715%;"></a>
+        <a href="./JSONcatalog.html" title="The jsoncatalog.txt" class="chapter done " data-progress="1.4" style="left: 33.333333333333336%;"></a>
     
-        <a href="./field_descriptions.json.html" title="field_descriptions.json" class="chapter done " data-progress="1.5" style="left: 42.857142857142854%;"></a>
+        <a href="./field_descriptions.json.html" title="field_descriptions.json" class="chapter done " data-progress="1.5" style="left: 40%;"></a>
     
-        <a href="./Running.html" title="Running the script" class="chapter done " data-progress="1.6" style="left: 50%;"></a>
+        <a href="./Running.html" title="Running the script" class="chapter done " data-progress="1.6" style="left: 46.666666666666664%;"></a>
     
-        <a href="./Hierarchies.html" title="Adding Hierarchical Data" class="chapter done new-chapter" data-progress="2" style="left: 57.142857142857146%;"></a>
+        <a href="./Hierarchies.html" title="Adding Hierarchical Data" class="chapter done new-chapter" data-progress="2" style="left: 53.333333333333336%;"></a>
     
-        <a href="./API.html" title="The Bookworm API" class="chapter  new-chapter" data-progress="3" style="left: 64.28571428571429%;"></a>
+        <a href="./API.html" title="The Bookworm API" class="chapter  new-chapter" data-progress="3" style="left: 60%;"></a>
     
-        <a href="./Tokens.html" title="Defining a Token" class="chapter  new-chapter" data-progress="4" style="left: 71.42857142857143%;"></a>
+        <a href="./Tokens.html" title="Defining a Token" class="chapter  new-chapter" data-progress="4" style="left: 66.66666666666667%;"></a>
     
-        <a href="./Websites.html" title="Web Front Ends" class="chapter  new-chapter" data-progress="5" style="left: 78.57142857142857%;"></a>
+        <a href="./Websites.html" title="Web Front Ends" class="chapter  new-chapter" data-progress="5" style="left: 73.33333333333333%;"></a>
     
-        <a href="./OneClick.html" title="The One Click Infrastructure" class="chapter  new-chapter" data-progress="6" style="left: 85.71428571428571%;"></a>
+        <a href="./OneClick.html" title="The One Click Infrastructure" class="chapter  new-chapter" data-progress="6" style="left: 80%;"></a>
     
-        <a href="./Extensions.html" title="Extensions" class="chapter  new-chapter" data-progress="7" style="left: 92.85714285714286%;"></a>
+        <a href="./Extensions.html" title="Extensions" class="chapter  new-chapter" data-progress="7" style="left: 86.66666666666667%;"></a>
     
-        <a href="./Future.html" title="Future Plans" class="chapter  new-chapter" data-progress="8" style="left: 100%;"></a>
+        <a href="./Future.html" title="Future Plans" class="chapter  new-chapter" data-progress="8" style="left: 93.33333333333333%;"></a>
+    
+        <a href="./Metaworm.html" title="Meta-Bookworm" class="chapter  " data-progress="8.1" style="left: 100%;"></a>
     
     </div>
 </div>
@@ -287,9 +301,13 @@
                     <section class="normal" id="section-gitbook_5">
                     
                         <h1 id="adding-hierarchical-data">Adding Hierarchical Data</h1>
+<h2 id="philosophy">Philosophy</h2>
 <p>For understanding patterns, it&#39;s incredibly useful to be able to easily and quickly aggregate.</p>
 <p>Suppose you&#39;re looking at texts you have classified at the level of their &quot;county.&quot;</p>
-<p>There are a lot of different ways you could store this information:</p>
+<p>There are a lot of different things you might want to do with that county-level information. A county is also part of state and a census region; it has a winner in the 2012 presidential election, and you might class it as urban, rural, or suburban.</p>
+<p>The most straightforward way to do this sort of classification is just to include data like this for every entry in your Bookworm. Want to include election winner? Just have a field called <code>county_election_winner</code> in every catalog entry.</p>
+<p>There&#39;s a reason, though, librarians don&#39;t store things like this on their cards: they would quickly get out of control. Even in a system like Bookworm, it&#39;s both inefficient and confusing to think of the election winner as being a property of the individual text: the election winner belongs to the county.</p>
+<p>This is especially true if you want to update a Bookworm after the fact with some new information. (There are a lot, lot, lot of cases where this is incredibly valuable to do: often you won&#39;t know what the useful patterns are until you&#39;ve started to explore the data). Generally, the data you&#39;ll want to put in will be not about the original texts, but about one of the metadata fields you already have.</p>
 <pre><code>county
     |
     state
@@ -299,7 +317,15 @@
     urban, rural, or suburban
     |
     winner in 2012 presidential election
-</code></pre>
+</code></pre><h2 id="implementation">Implementation</h2>
+<p>The bookworm code exposes some methods to add <strong>additional</strong> data into the database once it&#39;s been created. It can be deployed from instead a BookwormSQLDatabase() object, or invoked from the command line using:</p>
+<p><code>python OneClick.py supplementMetadataFromJSON $file $key</code></p>
+<p>(where $key and $file are parameters you must pass.)</p>
+<h3 id="tsv-import">TSV import</h3>
+<p>An easier but less powerful method is to import a TSV file.</p>
+<p><code>python OneClick.py supplementMetadataFromTSV</code></p>
+<p>This is just a convenience wrapper; the code will convert the tsv to a bunch of json entries, and it assumes the first column is the anchor field.</p>
+
                     
                     </section>
                 

@@ -6,8 +6,6 @@ We don't use the 2012 methods in the later ngrams corpora because they include a
 
 The full regular expression is defined in the python code as the following (as of April 20014).
 
-This requires the python `regex` module to support unicode regular expression phrases such as `\p{L}` (which matches any unicode letter in any language, and forms the basis for the codes below).
-
 This tokenization may change, so let us know if there are any changes you'd like to see.
 
 The final compiled regex compiles looking for the most complicated token-matching strings first, and as it goes on finds simpler and simpler forms, but I'll break it down in reverse order. We look for words, numbers, and then, finally, punctuators.
@@ -69,7 +67,7 @@ Unless otherwise specified, all punctuation marks are **retained** one at a time
 
 ### The master regex.
 
-This code is implemented in python as follows:
+This code is implemented in python as follows. One note: this requires the python `regex` module to support unicode regular expression phrases such as `\p{L}` (which matches any unicode letter in any language, and forms the basis for the codes below). So although some of the code below *appears* to use the `re` module, the prefix (in `bookworm/tokenizer.py`).
 
 ``` {python}
 import regex as re

@@ -14,4 +14,5 @@
 * [The One Click Infrastructure](OneClick.md)
 * [Extensions](Extensions.md)
 * [Future Plans](Future.md)
+    * [Meta-Bookworm](Metaworm.md)
 
