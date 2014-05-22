@@ -1,5 +1,6 @@
 # Summary
 
+* [Why Bookworm?](Why.md)
 * [Building a Bookworm](Building.md)
     * [Configuring MySQL and Apache](MySQL.md)
     * [Required Files](Requirements.md)
@@ -7,6 +8,8 @@
     * [The jsoncatalog.txt](JSONcatalog.md)
     * [field_descriptions.json](field_descriptions.json.md)
     * [Running the script](Running.md)
+    * [An example workflow](Example.md)
+    * [Maintenance](Maintenance.md)
 * [Adding Hierarchical Data](Hierarchies.md)
 * [The Bookworm API](API.md)
 * [Defining a Token](Tokens.md)

@@ -3,7 +3,7 @@
     <head prefix="og: http://ogp.me/ns# book: http://ogp.me/ns/book#">
         
         <meta charset="UTF-8">
-        <title>Extensions | Bookworm</title>
+        <title>Maintenance | Bookworm</title>
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="robots" content="index, follow">
@@ -13,13 +13,13 @@
         <meta name="generator" content="www.gitbook.io">
 
         
-        <link rel="next" href="./Future.html" />
+        <link rel="next" href="./Hierarchies.html" />
         
         
-        <link rel="prev" href="./OneClick.html" />
+        <link rel="prev" href="./Example.html" />
         
 
-        <meta property="og:title" content="Extensions | Bookworm">
+        <meta property="og:title" content="Maintenance | Bookworm">
         <meta property="og:site_name" content="Bookworm">
         <meta property="og:type" content="book">
         <meta property="og:locale" content="en_US">
@@ -42,7 +42,7 @@
 
 
         
-    <div class="book" data-github="bmschmidt/Presidio" data-level="8" data-basepath="." data-revision="1400770060772">
+    <div class="book" data-github="bmschmidt/Presidio" data-level="2.8" data-basepath="." data-revision="1400770060772">
     <div class="book-header">
     <!-- Actions Left -->
     
@@ -105,7 +105,7 @@
             <a href="https://github.com/bmschmidt/Presidio/issues" target="blank">Questions and Issues</a>
         </li>
         <li>
-            <a href="https://github.com/bmschmidt/Presidio/edit/master/Extensions.md" target="blank">Edit and Contribute</a>
+            <a href="https://github.com/bmschmidt/Presidio/edit/master/Maintenance.md" target="blank">Edit and Contribute</a>
         </li>
         <li class="divider"></li>
         
@@ -282,7 +282,7 @@
             <div class="page-wrapper" tabindex="-1">
                 <div class="book-progress">
     <div class="bar">
-        <div class="inner" style="width: 88.88888888888889%;min-width: 83.33333333333333%;"></div>
+        <div class="inner" style="width: 55.55555555555556%;min-width: 50%;"></div>
     </div>
     <div class="chapters">
     
@@ -308,17 +308,17 @@
     
         <a href="./Maintenance.html" title="Maintenance" class="chapter done " data-progress="2.8" style="left: 55.55555555555556%;"></a>
     
-        <a href="./Hierarchies.html" title="Adding Hierarchical Data" class="chapter done new-chapter" data-progress="3" style="left: 61.111111111111114%;"></a>
+        <a href="./Hierarchies.html" title="Adding Hierarchical Data" class="chapter  new-chapter" data-progress="3" style="left: 61.111111111111114%;"></a>
     
-        <a href="./API.html" title="The Bookworm API" class="chapter done new-chapter" data-progress="4" style="left: 66.66666666666667%;"></a>
+        <a href="./API.html" title="The Bookworm API" class="chapter  new-chapter" data-progress="4" style="left: 66.66666666666667%;"></a>
     
-        <a href="./Tokens.html" title="Defining a Token" class="chapter done new-chapter" data-progress="5" style="left: 72.22222222222223%;"></a>
+        <a href="./Tokens.html" title="Defining a Token" class="chapter  new-chapter" data-progress="5" style="left: 72.22222222222223%;"></a>
     
-        <a href="./Websites.html" title="Web Front Ends" class="chapter done new-chapter" data-progress="6" style="left: 77.77777777777777%;"></a>
+        <a href="./Websites.html" title="Web Front Ends" class="chapter  new-chapter" data-progress="6" style="left: 77.77777777777777%;"></a>
     
-        <a href="./OneClick.html" title="The One Click Infrastructure" class="chapter done new-chapter" data-progress="7" style="left: 83.33333333333333%;"></a>
+        <a href="./OneClick.html" title="The One Click Infrastructure" class="chapter  new-chapter" data-progress="7" style="left: 83.33333333333333%;"></a>
     
-        <a href="./Extensions.html" title="Extensions" class="chapter done new-chapter" data-progress="8" style="left: 88.88888888888889%;"></a>
+        <a href="./Extensions.html" title="Extensions" class="chapter  new-chapter" data-progress="8" style="left: 88.88888888888889%;"></a>
     
         <a href="./Future.html" title="Future Plans" class="chapter  new-chapter" data-progress="9" style="left: 94.44444444444444%;"></a>
     
@@ -329,50 +329,14 @@
 
                 <div class="page-inner">
                 
-                    <section class="normal" id="section-gitbook_4">
+                    <section class="normal" id="section-gitbook_8">
                     
-                        <h1 id="extensions">Extensions</h1>
-<p>There are a lot of logical ways to extend out Bookworm to work with established tools for text analysis. We want to make this easy without requiring enormous bloat in the core package.</p>
-<h2 id="installing-creating-extensions-">Installing/creating extensions.</h2>
-<p>The /extensions folder in a Bookworm is not created by default, but can be filled with folders; each folder is an installed extension.</p>
-<p>Each extension should be a git repository that can be cloned into that extensions location. The single command <code>make</code> run in that directory should run the build; it&#39;s permissible for an extension to require command-line input.</p>
-<p>That directory location means it will have access to your local bookworm configuration and other information. For example: once the geotagger builds its own metadata file,</p>
-<p><code>cd ../..; python OneClick.py supplementMetadataFromJSON extensions/geotagger/metadata.txt filename</code></p>
-<h2 id="existing-under-development-extensions">Existing/under development Extensions</h2>
-<h3 id="topic-modeling">Topic Modeling</h3>
-<p>The topic modeling extension adjusts the master wordcounts file so that each word has a topic assignment.</p>
-<h4 id="challenges">Challenges</h4>
-<ol>
-<li>Currently, it doesn&#39;t filter for stopwords, which is mathematically justifiable but hurts interpretability.</li>
-<li>Should there be multiple topics run?</li>
-</ol>
-<h3 id="the-bootstrapper-">The Bootstrapper.</h3>
-<p>It&#39;s hard to quantify the error associated with counts over time. <a href="https://github.com/bmschmidt/Bookworm-Bootstrap" target="_blank">Bookworm-bootstrap</a> builds a bunch of different bootstrapped samples in which the same book can appear multiple times; that gives some sense of what random variation might be doing to your sample.</p>
-<h3 id="the-sampler">The sampler</h3>
-<p>The bootstrapper lets you replicate sample error by drawing from your full sample: the <a href="https://github.com/bmschmidt/Bookworm-samples" target="_blank">bookworm-samples</a> package simply creates a new dummy metadata variable for every single document in your set, assigning it to one of 100 groups.</p>
-<p>This makes it possible to draw from a random distribution to see if the results you&#39;re getting are realistic.</p>
-<h3 id="geopositioner">Geopositioner</h3>
-<p>Given the name of field that contains place names, add in a longitude-latitude formatted set of places.</p>
-<p>Previously we stored latitude and longitude as separate fields. While there were a few nice features to that (you could search inside a bounding box), it was pretty inefficient compared to grouping on a single point. So now Bookworm stores all geolocation data as <strong>json strings</strong> consisting of latitude,longitude. So the location of New York City would be encoded as: <code>&quot;[40.7127,-74.0059]&quot;</code>.</p>
-<p>You could probably also write that as <code>&quot;[40.7127,285.9941]&quot;</code>; but as a standard, we&#39;ll say that the negative numbers are the only supported one. (Unless someone tells me otherwise is better).</p>
-<h3 id="geotagger">Geotagger</h3>
-<p>The Geotagger will work by parsing a text using the Stanford NLTK named entity extractor, pulling out persons, locations, and entities. The results could then be run through the geopositioner plugin.</p>
-<h2 id="extensions-we-want">Extensions we want</h2>
-<h3 id="the-linked-open-data-interchange-">The Linked Open Data interchange.</h3>
-<p>This would be the most amazing thing possible, and possibly worth building in as core funcationality. In essence: say you have a field <code>author_id</code>, and that corresponds to an identifier on some other page. By using a linked open data interchange, you could simply specify the source and the middle element of an RDF triple, and have the values automatically pulled in by some SPARQL process or something. The use of specific URIs in the <code>field_descriptions.json</code> field would enormously facilitate this.</p>
-<h3 id="serial-killer">Serial Killer</h3>
-<p>Implement the Ngrams serial killer algorithm in Bookworm. Been done once, but might be a nice pocket example of how this can work on the OL/Hathi data.</p>
-<h3 id="university-linker-">University Linker.</h3>
-<p>On my mind because of one Bookworm in particular, but with an academic audience it might be nice to have some pathway to populating texts that contain unstructured text of university names with all the data about universities in ICOADS.</p>
-<h3 id="genderation">Genderation</h3>
-<p>Given a field that contains names (first or complete), add fields to the Bookworm that include gender both as a flat determination and as a probability. Ideally, should take some logic about the birth year of the person into account (19th century Leslies are male, etc.). Could be implemented using my old code, which is a bit more flexible, or Lincoln Mullen&#39;s R package, which I&#39;ve used on one Bookworm.</p>
-<h2 id="strategies-for-handling-data">Strategies for handling data</h2>
-<h3 id="accessing-the-raw-text-">Accessing the raw text.</h3>
-<p>Extensions may access not just the database, but the raw creation files themselves.</p>
-<p>Currently, a few extensions access the <code>input.txt</code> file. For example, in the geotagger extension:</p>
-<pre><code>metadata.txt:
-    cat ../../files/texts/input.txt | parallel  --block-size 1M --pipe ./tagAChunk.sh &gt; metadata.txt
-</code></pre><p>This is clearly a bad idea, since it will break on other file storage techniques, we need to firmly define the <code>textStream</code> protocol for irregular bookworms, though, before this happens.</p>
+                        <h1 id="maintenance">Maintenance</h1>
+<p>Bookworm stores its master lookup tables in memory rather than on disk to make lookups faster.</p>
+<p>If there&#39;s sufficient demand, we can modify the code to allow the creation of slower but non-memory-consuming bookworms.</p>
+<p>Old versions of Bookworm dumped out a .sql file that recreated the memory tables on restart, and added a chron job to ensure it happened.</p>
+<p>The new version stores the code in the database itself, and can be run by invoking <code>python OneClick.py reloadMemory</code> from the Bookworm directory. (chron scripts to do this automatically will be supplied in a bit).</p>
+<p>The new version will only rebuild a memory table if the specified table is empty, so it&#39;s safe to run it on a live instance.</p>
 
                     
                     </section>
@@ -382,10 +346,10 @@
         </div>
 
         
-        <a href="./OneClick.html" class="navigation navigation-prev"><i class="fa fa-angle-left"></i></a>
+        <a href="./Example.html" class="navigation navigation-prev"><i class="fa fa-angle-left"></i></a>
         
         
-        <a href="./Future.html" class="navigation navigation-next"><i class="fa fa-angle-right"></i></a>
+        <a href="./Hierarchies.html" class="navigation navigation-next"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>

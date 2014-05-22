@@ -16,12 +16,12 @@ Bookworm installations are best tuned for recent versions of Ubuntu. Development
 
 #### Software Dependencies:
 * MySQL 5.6 or later.
-    * (MySQL 5.5 will work in most cases, but will not be supported going forward and make break with future updates.)
+    * (MySQL 5.5 will work in most cases, but will not be supported going forward and may break with future updates.)
 * Python 2.7, plus the modules:
     * regex
     * nltk
 * GNU parallel
-    * Which throws some extremely obnoxious warnings
+    * Which in some versions throws some extremely obnoxious warnings about how you have to cite it if using it: feel free to, but remember that the distribution includes many other software tools (python, MySQL, Bookworm itself) that are more fundamental to its operation than this tool.
 * Apache2 (or another web server of your choice.)
 
 ## Hardware requirements
@@ -32,7 +32,7 @@ Bookworm queries run fast because large amounts of memory is stored in memory. W
 
 How much RAM does Bookworm need?
 
-It depends on a lot of things: but 4GB, let's say? There may be problems with lots of processors and low RAM; in these cases, the line in the Makefile setting the parallel chunk size.
+It depends on a lot of things, like how big the bookworm you're building is: but 4GB, let's say? There may be problems with lots of processors and low RAM; in these cases, the line in the Makefile setting the parallel chunk size.
 
 A running installations also stores a number of files in memory. Several different bookworms running simultaneously on a server might take up a few gigs of memory. That is to say, you might be able to test it off an old laptop or an AWS micro instance, but you probably don't want to serve it from there.
 
@@ -85,6 +85,14 @@ The final database takes up 42 GB. The largest files are the unigram **indexes**
 -rw-rw---- 1 mysql mysql  99M Apr 16 18:07 nwords.MYD
 -rw-rw---- 1 mysql mysql  43M Apr 16 17:31 words.MYD
 ```
+
+
+**As a lower limit,** take the Open Library corpus, which is very long individual texts.
+
+That is 1,000,000 documents; the final results take up 1.5TB on disk for the MySQL tables alone.
+
+So a 100,000 book bookworm might take more like 150 GB for storage.
+
 
 ## Is this too much?
 
