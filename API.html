@@ -13,7 +13,7 @@
         <meta name="generator" content="www.gitbook.io">
 
         
-        <link rel="next" href="./Tokens.html" />
+        <link rel="next" href="./Websites.html" />
         
         
         <link rel="prev" href="./Hierarchies.html" />
@@ -42,7 +42,7 @@
 
 
         
-    <div class="book" data-github="bmschmidt/Presidio" data-level="4" data-basepath="." data-revision="1400770060772">
+    <div class="book" data-github="bmschmidt/Presidio" data-level="4" data-basepath="." data-revision="1401834178780">
     <div class="book-header">
     <!-- Actions Left -->
     
@@ -217,19 +217,19 @@
                 
             </li>
         
-            <li  data-level="5" data-path="Tokens.html">
+            <li  data-level="5" data-path="Websites.html">
                 
-                <a href="./Tokens.html">
-                    <i class="fa fa-check"></i> <b>5.</b> Defining a Token
+                <a href="./Websites.html">
+                    <i class="fa fa-check"></i> <b>5.</b> Web Front Ends
                 </a>
                 
                 
             </li>
         
-            <li  data-level="6" data-path="Websites.html">
+            <li  data-level="6" data-path="Tokens.html">
                 
-                <a href="./Websites.html">
-                    <i class="fa fa-check"></i> <b>6.</b> Web Front Ends
+                <a href="./Tokens.html">
+                    <i class="fa fa-check"></i> <b>6.</b> Defining a Token
                 </a>
                 
                 
@@ -312,9 +312,9 @@
     
         <a href="./API.html" title="The Bookworm API" class="chapter done new-chapter" data-progress="4" style="left: 66.66666666666667%;"></a>
     
-        <a href="./Tokens.html" title="Defining a Token" class="chapter  new-chapter" data-progress="5" style="left: 72.22222222222223%;"></a>
+        <a href="./Websites.html" title="Web Front Ends" class="chapter  new-chapter" data-progress="5" style="left: 72.22222222222223%;"></a>
     
-        <a href="./Websites.html" title="Web Front Ends" class="chapter  new-chapter" data-progress="6" style="left: 77.77777777777777%;"></a>
+        <a href="./Tokens.html" title="Defining a Token" class="chapter  new-chapter" data-progress="6" style="left: 77.77777777777777%;"></a>
     
         <a href="./OneClick.html" title="The One Click Infrastructure" class="chapter  new-chapter" data-progress="7" style="left: 83.33333333333333%;"></a>
     
@@ -329,12 +329,29 @@
 
                 <div class="page-inner">
                 
-                    <section class="normal" id="section-gitbook_2">
+                    <section class="normal" id="section-gitbook_1">
                     
                         <h1 id="the-bookworm-api">The Bookworm API</h1>
 <p>The Bookworm API acts as an interchange format for requesting data about large collections of texts.</p>
-<p>The orthodox implementation at the time of writing is <a href="github.com/bmschmidt/BookwormAPI">my BookwormAPI repository</a>, written in Python and connecting to scripts</p>
+<p>The orthodox implementation at the time of writing is <a href="github.com/bmschmidt/BookwormAPI">my BookwormAPI repository</a>, written in Python and connecting to the MySQL backend.</p>
 <p>One of the major advantages of the API, however, is that it can be implemented on top of other systems (in whole or in part); so that bookcounts queries can easily be run through Solr, for example.</p>
+<h1 id="setting-up-an-api-server">Setting up an API server</h1>
+<p><a href="github.com/bmschmidt/BookwormAPI">My BookwormAPI repository</a> contains the scripts necessary to run an API on a local machine which has a MySQL backend already running.</p>
+<p>You can clone the repository directly into your webserver&#39;s <code>/cgi-bin</code> directory, or just download the scripts if there are other cgi-scripts you don&#39;t want to disturb. Once it&#39;s cloned, you should be able to query the database by hitting, for example, <code>http://myhost.org/cgi-bin/dbbindings.py?queryTerms={&quot;database&quot;:&quot;YOURDBNAME&quot;,&quot;method&quot;:&quot;returnPossibleFields&quot;}</code></p>
+<p>Your local web installations will rely on this API working to make queries.</p>
+<h3 id="troubleshooting">Troubleshooting</h3>
+<p>This script uses python to connect to MySQL through Apache, so there are many possible points of failure. Check <code>/var/log/apache2/error.log</code> or elsewhere.</p>
+<ol>
+<li>Are all python modules loaded?</li>
+<li>Are .py scripts in <code>/cgi-bin</code> treated as executable?</li>
+<li>Does the version of python in the shebang have access to the required modules, including numpy?<ul>
+<li>If you&#39;re running it under OS X and Homebrew, you may need to change the opening shebang to <code>#!/usr/local/bin/python</code> to make use of all necessary modules.</li>
+</ul>
+</li>
+<li>Is python able to connect to a running MySQL instance using the specified login files?</li>
+</ol>
+<h3 id="running-the-api-and-the-mysql-backend-on-separate-servers-">Running the API and the MySQL backend on separate servers.</h3>
+<p>This is possible through manipulating the &quot;known_hosts&quot; file.</p>
 
                     
                     </section>
@@ -347,7 +364,7 @@
         <a href="./Hierarchies.html" class="navigation navigation-prev"><i class="fa fa-angle-left"></i></a>
         
         
-        <a href="./Tokens.html" class="navigation navigation-next"><i class="fa fa-angle-right"></i></a>
+        <a href="./Websites.html" class="navigation navigation-next"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>

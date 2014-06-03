@@ -13,10 +13,10 @@
         <meta name="generator" content="www.gitbook.io">
 
         
-        <link rel="next" href="./OneClick.html" />
+        <link rel="next" href="./Tokens.html" />
         
         
-        <link rel="prev" href="./Tokens.html" />
+        <link rel="prev" href="./API.html" />
         
 
         <meta property="og:title" content="Web Front Ends | Bookworm">
@@ -42,7 +42,7 @@
 
 
         
-    <div class="book" data-github="bmschmidt/Presidio" data-level="6" data-basepath="." data-revision="1400770060772">
+    <div class="book" data-github="bmschmidt/Presidio" data-level="5" data-basepath="." data-revision="1401834178780">
     <div class="book-header">
     <!-- Actions Left -->
     
@@ -217,19 +217,19 @@
                 
             </li>
         
-            <li  data-level="5" data-path="Tokens.html">
+            <li  data-level="5" data-path="Websites.html">
                 
-                <a href="./Tokens.html">
-                    <i class="fa fa-check"></i> <b>5.</b> Defining a Token
+                <a href="./Websites.html">
+                    <i class="fa fa-check"></i> <b>5.</b> Web Front Ends
                 </a>
                 
                 
             </li>
         
-            <li  data-level="6" data-path="Websites.html">
+            <li  data-level="6" data-path="Tokens.html">
                 
-                <a href="./Websites.html">
-                    <i class="fa fa-check"></i> <b>6.</b> Web Front Ends
+                <a href="./Tokens.html">
+                    <i class="fa fa-check"></i> <b>6.</b> Defining a Token
                 </a>
                 
                 
@@ -282,7 +282,7 @@
             <div class="page-wrapper" tabindex="-1">
                 <div class="book-progress">
     <div class="bar">
-        <div class="inner" style="width: 77.77777777777777%;min-width: 72.22222222222223%;"></div>
+        <div class="inner" style="width: 72.22222222222223%;min-width: 66.66666666666667%;"></div>
     </div>
     <div class="chapters">
     
@@ -312,9 +312,9 @@
     
         <a href="./API.html" title="The Bookworm API" class="chapter done new-chapter" data-progress="4" style="left: 66.66666666666667%;"></a>
     
-        <a href="./Tokens.html" title="Defining a Token" class="chapter done new-chapter" data-progress="5" style="left: 72.22222222222223%;"></a>
+        <a href="./Websites.html" title="Web Front Ends" class="chapter done new-chapter" data-progress="5" style="left: 72.22222222222223%;"></a>
     
-        <a href="./Websites.html" title="Web Front Ends" class="chapter done new-chapter" data-progress="6" style="left: 77.77777777777777%;"></a>
+        <a href="./Tokens.html" title="Defining a Token" class="chapter  new-chapter" data-progress="6" style="left: 77.77777777777777%;"></a>
     
         <a href="./OneClick.html" title="The One Click Infrastructure" class="chapter  new-chapter" data-progress="7" style="left: 83.33333333333333%;"></a>
     
@@ -332,8 +332,13 @@
                     <section class="normal" id="section-gitbook_16">
                     
                         <h1 id="chapter-3-web-front-ends">Chapter 3: Web Front Ends</h1>
+<p>The API is designed to allow a variety of possible visualizations. We&#39;ve implemented a few.</p>
 <h2 id="the-primary-gui">The Primary GUI</h2>
 <p>The primary GUI is at <a href="https://github.com/econpy/BookwormGUI" target="_blank">https://github.com/econpy/BookwormGUI</a>. It runs on the highcharts library, and generates attractive line charts over time. It&#39;s easy to use, meets a significant percentage of use cases, and has some very nice design.</p>
+<h3 id="setting-up-a-gui-instance-">Setting up a GUI instance.</h3>
+<p>To set up a Bookworm using the primary GUI, clone the git repository into a directory that&#39;s being served through your webserver. The web server application determines the name of your bookworm from the webpage you give it, so the folder should be named the same as your database. If your database is named <code>federalist</code>, for example, your page should be located at <code>http://myhost.org/federalist</code> or <code>http://federalist.myhost.org</code>.</p>
+<p>You also need to copy the settings files created when you ran the bookworm. If your bookworm is named &quot;mybookworm,&quot; this will be located at <code>/mybookworm.json</code> in the files directory: so from the root bookworm directory, you can set it up by running <code>cp files/mybookworm.json /var/www/static/options.json</code>.</p>
+<p>With that done, it should run nicely.</p>
 <h2 id="the-d3-platform">The D3 platform</h2>
 <p>I (Ben) have written a set of code in <a href="d3js.org">D3</a> that makes a wide variety of visualizations possible, and handles the shared elements (creating dropdown selectors, fetching data through the API, making elements display information on hover and link to a search on click) transparently so new coders can just write D3 code to work with a transparent bookworm.data element.</p>
 <p>It&#39;s uglier, though, and doesn&#39;t currently support multiple queries in the same plot.</p>
@@ -347,10 +352,10 @@
         </div>
 
         
-        <a href="./Tokens.html" class="navigation navigation-prev"><i class="fa fa-angle-left"></i></a>
+        <a href="./API.html" class="navigation navigation-prev"><i class="fa fa-angle-left"></i></a>
         
         
-        <a href="./OneClick.html" class="navigation navigation-next"><i class="fa fa-angle-right"></i></a>
+        <a href="./Tokens.html" class="navigation navigation-next"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>
