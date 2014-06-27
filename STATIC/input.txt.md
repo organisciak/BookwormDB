@@ -8,16 +8,16 @@ The input should be in UTF-8. (ASCII is a valid subset of UTF-8, and therefore a
 
 ### The easy route: a single file
 
-The basic and most straightforward file format for input.txt is a single string that serves as an identifier for the text (keyed to the `filename` element in [jsoncatalog.txt](), followed by a tab, followed by the full text of the document, **with all newlines and carriage returns removed**.
+The basic and most straightforward file format for input.txt is a single string that serves as an identifier for the text (keyed to the `filename` element in [jsoncatalog.txt](), followed by a tab, followed by the full text of the document, **with all tabs, newlines, and carriage returns removed**.
 
 If your texts have newlines, you will need to remove them before putting them into this format. It is usually best to replace them with spaces. (Or, if you don't want bigrams formed across the break, with the formfeed `\f` character).
 
-An example input.txt might look like this: note that the only tabs are between the text identifier and the text of the book.
+An example input.txt might look like this, **except that the `[\t]` characters should be tabs, not the bracket **. (Sorry: I find myself unable to reproduce literal tabs in this format).
 
 ```
-TaleOfTwoCities	It was the best of times, It was the worst of times…
-AnnaKarenina	Stately, plump, Buck Mulligan is different in his own way, through a commodius vicus of recirculation…
-Nagel-1970	Just as there are rational requirements on thought, there are rational requirements on action, and altruism is one of them
+TaleOfTwoCities[\t]It was the best of times, It was the worst of times…
+AnnaKarenina[\t]Stately, plump, Buck Mulligan is different in his own way, through a commodius vicus of recirculation…
+Nagel-1970[\t]Just as there are rational requirements on thought, there are rational requirements on action, and altruism is one of them
 ```
 
 ### More complicated: using a pipe
