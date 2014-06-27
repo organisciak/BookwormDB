@@ -15,9 +15,9 @@ If your texts have newlines, you will need to remove them before putting them in
 An example input.txt might look like this: note that the only tabs are between the text identifier and the text of the book.
 
 ```
-TaleOfTwoCities It was the best of times, It was the worst of times…
+TaleOfTwoCities    It was the best of times, It was the worst of times…
 AnnaKarenina    Stately, plump, Buck Mulligan is different in his own way, through a commodius vicus of recirculation…
-Nagel-1970  Just as there are rational requirements on thought, there are rational requirements on action, and altruism is one of them
+Nagel-1970    Just as there are rational requirements on thought, there are rational requirements on action, and altruism is one of them
 ```
 
 ### More complicated: using a pipe
