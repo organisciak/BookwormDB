@@ -42,7 +42,7 @@
 
 
         
-    <div class="book" data-github="bmschmidt/Presidio" data-level="2.3" data-basepath="." data-revision="1401834178780">
+    <div class="book" data-github="bmschmidt/Presidio" data-level="2.3" data-basepath="." data-revision="1403906816679">
     <div class="book-header">
     <!-- Actions Left -->
     
@@ -336,12 +336,12 @@
 <p>The input should be in UTF-8. (ASCII is a valid subset of UTF-8, and therefore acceptable). Bookworm attempts to warn when skipping words in invalid encodings (many Latin-1 characters, for example), but we cannot guarantee that every strange character will produce the correct result.</p>
 <h2 id="formatting-texts-for-bookworm">Formatting texts for Bookworm</h2>
 <h3 id="the-easy-route-a-single-file">The easy route: a single file</h3>
-<p>The basic and most straightforward file format for input.txt is a single string that serves as an identifier for the text (keyed to the <code>filename</code> element in <a href="">jsoncatalog.txt</a>, followed by the full text of the document, <strong>with all newlines and carriage returns removed</strong>.</p>
+<p>The basic and most straightforward file format for input.txt is a single string that serves as an identifier for the text (keyed to the <code>filename</code> element in <a href="">jsoncatalog.txt</a>, followed by a tab, followed by the full text of the document, <strong>with all newlines and carriage returns removed</strong>.</p>
 <p>If your texts have newlines, you will need to remove them before putting them into this format. It is usually best to replace them with spaces. (Or, if you don&#39;t want bigrams formed across the break, with the formfeed <code>\f</code> character).</p>
-<p>An example input.txt might look like this:</p>
-<pre><code>TaleOfTwoCities   It was the best of times, It was the worst of times…
+<p>An example input.txt might look like this: note that the only tabs are between the text identifier and the text of the book.</p>
+<pre><code>TaleOfTwoCities It was the best of times, It was the worst of times…
 AnnaKarenina    Stately, plump, Buck Mulligan is different in his own way, through a commodius vicus of recirculation…
-Nagel-1970    Just as there are rational requirements on thought, there are rational requirements on action, and altruism is one of them
+Nagel-1970  Just as there are rational requirements on thought, there are rational requirements on action, and altruism is one of them
 </code></pre><h3 id="more-complicated-using-a-pipe">More complicated: using a pipe</h3>
 <p>If you have, for example, several different smaller files in that format you want Bookworm to read in all at once, you could run</p>
 <pre><code class="lang-{sh}">mkfifo texts/input.txt
