@@ -12,7 +12,7 @@ The basic and most straightforward file format for input.txt is a single string 
 
 If your texts have newlines, you will need to remove them before putting them into this format. It is usually best to replace them with spaces. (Or, if you don't want bigrams formed across the break, with the formfeed `\f` character).
 
-An example input.txt might look like this, **except that the `[\t]` characters should be tabs, not the bracket **. (Sorry: I find myself unable to reproduce literal tabs in this format).
+An example input.txt might look like this, **except that the `[\t]` characters should be tabs, not the bracket characters you see**. (Sorry: I find myself unable to reproduce literal tabs in this format).
 
 ```
 TaleOfTwoCities[\t]It was the best of times, It was the worst of times…
