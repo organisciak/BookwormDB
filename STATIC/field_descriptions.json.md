@@ -4,7 +4,7 @@ The `field_descriptions.json` file is metadata about the metadata. This defines 
 
 ### The automatic guesser
 
-If you don't enter in a field_descriptions.json, Bookworm will simply guess based on the name and layout of the fields what kind of data is stored in them. There's a really good chance this will fail, so don't rely on it very heavily.
+If you don't enter in a field_descriptions.json, Bookworm will simply guess based on the name and layout of the fields what kind of data is stored in them. There's a really good chance this will fail, so don't rely on it very heavily. But it can be helpful to run it manually before building the bookworm (by running `python OneClick.py guessAtFieldDescriptions`) and then use the output at `files/metadata/field_descriptions.json` as a template to edit.
 
 But see the chapter of "Future Plans" below for one option to use field names from a defined ontology (like Dublin Core) to automatically handle data.
 
@@ -46,3 +46,27 @@ Here is an example of the `field_descriptions.json` file from the Open Library B
 
 
 ### Derived fields
+
+`field_descriptions.json` also supports a syntax for **derived** fields; a single input field can yield several fields in the ultimate metadata.
+
+Currently this is only enabled for **time** fields.
+Here's how it works: given the following snipped
+
+``` {js}
+    {"field":"publish","datatype":"time","type":"character","unique":true,"derived":[
+        {"resolution":"year"},
+        {"resolution":"month"},
+        {"resolution":"month","aggregate":"year"}
+    ]}
+```
+Your time should be input in an ISO style (eg, "1921-03-05", although leading zeroes are not necessary). For each of the key-values in derived, a different field will be created: so in this example, we'll get `publish_year`, `publish_month`, and `publish_month_year`. The year will be an integer 1921: the month will be an integer rounded to first day of March in 1921; and month_year will take the "month of the year", so that you can do things like look at calendar cycles. (This is particularly useful for visualization).
+
+Aside from year, all values are stored in days since year 0. (There is no year zero, of course, but MySQL and Javascript act as though there is.)
+
+Years before 1 AD will not behave properly.
+
+
+
+
+
+

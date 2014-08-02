@@ -2,7 +2,9 @@
 
 ### Character encoding
 
-The input should be in UTF-8. (ASCII is a valid subset of UTF-8, and therefore acceptable). Bookworm attempts to warn when skipping words in invalid encodings (many Latin-1 characters, for example), but we cannot guarantee that every strange character will produce the correct result.
+The input should be in UTF-8. (ASCII is a valid subset of UTF-8, and therefore OK as well). Bookworm attempts to warn when skipping words in invalid encodings (many Latin-1 characters, for example), but we cannot guarantee that every strange character will produce the correct result.
+
+Encoding errors are not fatal, because it's often rare to have a million files of any sort with a little error. But that means you should be
 
 ## Formatting texts for Bookworm
 
@@ -20,35 +22,29 @@ AnnaKarenina[\t]Stately, plump, Buck Mulligan is different in his own way, throu
 Nagel-1970[\t]Just as there are rational requirements on thought, there are rational requirements on action, and altruism is one of them
 ```
 
-### More complicated: using a pipe
-
-If you have, for example, several different smaller files in that format you want Bookworm to read in all at once, you could run
-
-```{sh}
-mkfifo texts/input.txt
-cat mytextfolder.* > texts/input.txt &
-make database bookwormName=OL
-```
-
-The `&` after the cat statement lets you move on to actually doing a process: otherwise, it will simply hang indefinitely, waiting for some process to come along and read the contents.
-
-### Most flexible: specify a path.
+### Most flexible: specify a process that writes to stdout.
 
 They said you could have a Model T in any color you liked, as long as it was black. Bookworm is happy to work with texts of any format, as long as it gets them in the two-column format above.
 
 What does this mean? If you're working with a set of gzipped tarballs, for instance, you don't have to actually decompress them first: you can just script a program that writes to `stdout` in the above format, and pass that program to the makefile. So if you wrote a script that printed out elements on the fly and put it into 'scripts' (the recommended, but not necessary, place) you could run
 
 ```{sh}
-make bookwormName=OL textStream=scripts/unzipTarball.sh
+make bookwormName=OL textStream="sh scripts/unzipTarball.sh"
 ```
 
-and the bookworm would successfully build without any file named `input.txt` at all.
+and the bookworm would successfully build without any file named `input.txt` at all. (Strictly speaking, the default bookworm process does use a text stream: it just tries to run `cat files/metadata/input.txt`.
 
 The lack of an `input.txt` may be a problem for certain extensions.
 
+This can frequently be a major saver of disk space, or allow a more reproducible workflow.
+
+For a particularly complicated example, see the Makefile from the [Chronicling America Bookworm](http://github.com/bmschmidt/ChronAm-Bookworm)
+
+Just keep in mind that the stream is run twice (once to create a list of words in the texts, and again to actually encode them), so on large collections the overhead shouldn't be extremely high. Avoid hitting thousands of small files, and use a quick-to-decompress format like gzip or lzop rather than something expensive like bzip.
+
 ### Preprocessing
 
-Lots of texts are messy: they have Google bookplates, hyphenated words broken at newlines, or scraps of HTML. You can leave these in the Bookworm and suffer through: or you can script around them, before writing to the input.txt or the textStream you'll be using. If you write useful code (for joining line-end breaks while removing newlines, for example, you could helpfully share it as a possible replacement for the textStream program that Bookworm uses.
+Lots of texts are messy: they have Google bookplates, hyphenated words broken at newlines, or scraps of HTML. You can leave these in the Bookworm and suffer through: or you can script around them, before writing to the input.txt or the textStream you'll be using. If you write useful code (for joining line-end breaks while removing newlines, for example, you could helpfully share it as a possible drop-in for the textStream program that Bookworm uses.
 
 
 
