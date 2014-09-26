@@ -1,4 +1,4 @@
-#
+# Why Bookworm?
 
 This manual will get technical pretty quick: but let's start with the broadest strokes.
 
