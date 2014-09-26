@@ -15,7 +15,7 @@
 * [The Bookworm API](API.md)
    * [API Philosophy](api_philosophy.md)
    * [Query Structure](query_structure.md)
-       * [search_limits and compare_limits](search_limits_and_compare_limits.md)
+   * [Search Limiting](Search_Limiting.md)
 * [Web Front Ends](Websites.md)
 * [Defining a Token](Tokens.md)
 * [The One Click Infrastructure](OneClick.md)

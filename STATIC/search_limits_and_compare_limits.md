@@ -2,7 +2,7 @@
 
 ## Introduction
 
-The most powerful aspect of bookworm is its ability to filter down to a custom set of fields. This is done by setting a number of constraints on `search_limits` fields.
+The most powerful aspect of bookworm is its ability to filter down to a custom set of fields. This is done by setting a number of constraints on `search_limits` or `compare_limits` fields.
 
 
 ### Note
