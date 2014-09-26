@@ -42,7 +42,7 @@
 
 
         
-    <div class="book" data-github="bmschmidt/Presidio" data-level="5.3" data-basepath="." data-revision="1411760874473">
+    <div class="book" data-github="bmschmidt/Presidio" data-level="5.3" data-basepath="." data-revision="1411761044809">
     <div class="book-header">
     <!-- Actions Left -->
     
@@ -438,7 +438,10 @@
 {&quot;publish_year&quot;:{&quot;$lt&quot;:1951,&quot;$gt&quot;:1899}
 </code></pre><h2 id="and-or-limitations">And/Or limitations</h2>
 <p>More complicated boolean statements are possible by using the special <code>$or</code> construction. (This syntax is also borrowed from MongoDB). <code>$or</code> points to an array, <strong>any element of which might be true</strong>. To search for books that are either published in the US or by US-born authors, for example, you might limit as follows:</p>
-<pre><code>{&quot;$or&quot;:[{&quot;country&quot;:[&quot;USA&quot;],&quot;author_birth_country&quot;:[&quot;USA&quot;]}}]
+<pre><code>{&quot;$or&quot;:[
+      {&quot;country&quot;:[&quot;USA&quot;]},
+      {&quot;author_birth_country&quot;:[&quot;USA&quot;]}
+]}
 </code></pre><p><code>$and</code> is the opposite of <code>$or</code>: so the following query:</p>
 <pre><code>
 &quot;search_limits&quot;:{&quot;$and&quot;:[{&quot;country&quot;:[&quot;USA&quot;],&quot;author_birth_country&quot;:[&quot;USA&quot;]}]}

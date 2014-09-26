@@ -91,7 +91,10 @@ So to limit to books published between 1900 and 1950, **either** of the followin
 More complicated boolean statements are possible by using the special `$or` construction. (This syntax is also borrowed from MongoDB). `$or` points to an array, **any element of which might be true**. To search for books that are either published in the US or by US-born authors, for example, you might limit as follows:
 
 ```
-{"$or":[{"country":["USA"],"author_birth_country":["USA"]}}]
+{"$or":[
+      {"country":["USA"]},
+	  {"author_birth_country":["USA"]}
+]}
 ```
 
 `$and` is the opposite of `$or`: so the following query:
