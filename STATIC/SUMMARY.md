@@ -1,5 +1,6 @@
 # Summary
 
+* [Introduction](README.md)
 * [Why Bookworm?](Why.md)
 * [Building a Bookworm](Building.md)
    * [Configuring MySQL and Apache](MySQL.md)
@@ -12,9 +13,9 @@
    * [Maintenance](Maintenance.md)
 * [Adding Hierarchical Data](Hierarchies.md)
 * [The Bookworm API](API.md)
-   * [API Philosophy](/api_philosophy.md)
-   * [Query Structure](/query_structure.md)
-       * [search_limits and compare_limits](//search_limits_and_compare_limits)
+   * [API Philosophy](api_philosophy.md)
+   * [Query Structure](query_structure.md)
+       * [search_limits and compare_limits](search_limits_and_compare_limits.md)
 * [Web Front Ends](Websites.md)
 * [Defining a Token](Tokens.md)
 * [The One Click Infrastructure](OneClick.md)
