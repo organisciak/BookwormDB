@@ -1,0 +1,12 @@
+[
+	{ "field":"title", "datatype":"etc", "type":"text", "unique": true },
+	{ "field":"genre", "datatype":"categorical", "type":"character", "unique": false },
+	{ "field":"year", "datatype":"time", "type":"character", "unique": true, "derived" : [
+		{"resolution":"year"}
+	]},
+	{ "field":"oclc", "datatype":"etc", "type":"character", "unique": true },
+	{ "field":"language", "datatype":"categorical", "type":"character", "unique": false },
+	{ "field":"pageCount", "datatype":"etc", "type":"int", "unique": false },
+	{ "field":"imprint", "datatype":"etc", "type":"character", "unique": false },
+	{ "field":"searchstring", "datatype":"searchstring", "type":"text", "unique": true }
+]
