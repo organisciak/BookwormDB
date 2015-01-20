@@ -19,13 +19,12 @@ def main():
                 json[attr] = getattr(vol, attr)
             else:
                 json[attr] = [] if attr == 'genre' else ''
-
+        json['filename'] = vol.id
         if hasattr(vol, "handleUrl"):
             json['searchstring'] = "<a href=\"{}\">{}</a>".format(vol.handleUrl, vol.title)
         else:
             json['searchstring'] = vol.title
         print json
-        
 
 if __name__=='__main__':
     main()
