@@ -1,8 +1,9 @@
 #invoke with any of these variable: eg, `make`
 
-textStream:=scripts/justPrintInputTxt.sh
-
 webDirectory="/var/www/"
+featureDirectory="/data/datasets/htrc-feat-extract/data"
+
+textStream:='printText.sh'
 bookwormName=$(shell grep database bookworm.cnf | sed 's/.* = //g')
 
 #The data format may vary depending on how the raw files are stored. The easiest way is to simply pipe out the contents from input.txt: but any other method that produces the same format (a python script that unzips from a directory with an arcane structure, say) is just as good.
@@ -10,13 +11,13 @@ bookwormName=$(shell grep database bookworm.cnf | sed 's/.* = //g')
 
 webSite = $(addsuffix bookwormName,webDirectory)
 
-all: bookworm.cnf files/targets files/targets/database
+all: bookworm.cnf files/targets files/targets/input files/targets/database
 
 bookworm.cnf:
 	python scripts/makeConfiguration.py
 
 #These are all directories that need to be in place for the other scripts to work properly
-files/targets: files/texts
+files/targets: 
 	mkdir -p files/texts/encoded/{unigrams,bigrams,trigrams,completed}
 	mkdir -p files/texts/{textids,wordlist}
 	mkdir -p files/targets
@@ -32,7 +33,8 @@ clean:
 	rm -f files/metadata/catalog.txt
 	rm -f files/metadata/jsoncatalog_derived.txt
 	rm -f files/metadata/field_descriptions_derived.json
-
+	rm -f files/targets/input	
+	
 # Make 'pristine' is a little more aggressive
 #This can be dangerous
 
@@ -41,13 +43,18 @@ pristine: clean
 	rm -rf files/texts/textids
 	rm -rf files/texts/wordlist/*
 
+# For HTRC, to process feature files beforehand. Saves as files split at 10k lines, to avoid system filesize limits
+files/targets/input: files/targets
+	find $(featureDirectory) -name "*json.bz2" | parallel -j50% -n10 python2.7 scripts/htrc_feature_textstream.py {} | gzip -c >$(inputFile)
+	touch $@
+
 # The wordlist is an encoding scheme for words: it tokenizes in parallel, and should
 # intelligently update an exist vocabulary where necessary. It takes about half the time
 # just to build this: any way to speed it up is a huge deal.
 # The easiest thing to do, of course, is simply use an Ngrams or other wordlist.
 
 files/texts/wordlist/wordlist.txt:
-	$(textStream) | parallel --block-size 100M --pipe python bookworm/printTokenStream.py | python bookworm/wordcounter.py
+	$(textStream) | parallel --block-size 100M --pipe python2.7 bookworm/printTokenStream.py | python2.7 bookworm/wordcounter.py
 
 # This invokes OneClick on the metadata file to create a more useful internal version
 # (with parsed dates) and to create a lookup file for textids in files/texts/textids
