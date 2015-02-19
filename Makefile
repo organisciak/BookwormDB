@@ -2,6 +2,7 @@
 
 featureDirectory="/data/datasets/htrc-feat-extract/data"
 textStream:='printText.sh'
+inputFile="/data/datasets/htrc-feat-extract/bookwormFeatureCounts.gz"
 
 # The maximum size of each input block for parallel processing.
 # 100M should be appropriate for a machine with 8-16GB of memory: if you're
@@ -54,9 +55,9 @@ pristine: clean
 	rm -rf files/texts/textids
 	rm -rf files/texts/wordlist/*
 
-# For HTRC, to process feature files beforehand. Saves as files split at 10k lines, to avoid system filesize limits
+# For HTRC, to process feature files beforehand. 
 files/targets/input: files/targets
-	find $(featureDirectory) -name "*json.bz2" | parallel -j50% -n10 python2.7 scripts/htrc_feature_textstream.py {} | gzip -c >$(inputFile)
+	find $(featureDirectory) -name "*json.bz2" | parallel -j90% -n10 python2.7 scripts/htrc_featurecount_stream.py {} | gzip -c >$(inputFile)
 	touch $@
 
 # The wordlist is an encoding scheme for words: it tokenizes in parallel, and should

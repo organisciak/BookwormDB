@@ -1,6 +1,8 @@
 '''
 Write text stream in the form asked by bookworm. Note that there is no positional information, so the order is random.
 This makes >1 grams meaningless in Bookworm, but still a good indicator of size and performance.
+
+This script is deprecated in favour of htrc_featurecount_stream.py
 '''
 
 from htrc_features import FeatureReader
