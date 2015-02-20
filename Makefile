@@ -3,6 +3,7 @@
 featureDirectory="/data/datasets/htrc-feat-extract/data"
 textStream:='printText.sh'
 inputFile="/data/datasets/htrc-feat-extract/bookwormFeatureCounts.gz"
+source="countfile"
 
 # The maximum size of each input block for parallel processing.
 # 100M should be appropriate for a machine with 8-16GB of memory: if you're
@@ -57,7 +58,7 @@ pristine: clean
 
 # For HTRC, to process feature files beforehand. 
 files/targets/input: files/targets
-	find $(featureDirectory) -name "*json.bz2" | parallel -j90% -n10 python2.7 scripts/htrc_featurecount_stream.py {} | gzip -c >$(inputFile)
+	find $(featureDirectory) -name "*json.bz2" | parallel -j90% -n10 python scripts/htrc_featurecount_stream.py {} | gzip -c >$(inputFile)
 	touch $@
 
 # The wordlist is an encoding scheme for words: it tokenizes in parallel, and should
@@ -66,7 +67,7 @@ files/targets/input: files/targets
 # The easiest thing to do, of course, is simply use an Ngrams or other wordlist.
 
 files/texts/wordlist/wordlist.txt:
-	$(textStream) | parallel --block-size $(blockSize) --pipe python2.7 bookworm/printTokenStream.py | python2.7 bookworm/wordcounter.py
+	scripts/fast_featurecounter.sh $(inputFile) /data/datasets/htrc-feat-extract/tmp1/ $(blockSize)
 
 # This invokes OneClick on the metadata file to create a more useful internal version
 # (with parsed dates) and to create a lookup file for textids in files/texts/textids
