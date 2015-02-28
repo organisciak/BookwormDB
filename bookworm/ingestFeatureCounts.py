@@ -12,9 +12,9 @@ sep=None
 
 
 # For now, you have to create these files. (I'd recommend doing it as a named pipe)
-
-unigrams = "../unigrams.txt"
-bigrams = "../bigrams.txt"
+path = os.path.dirname(os.path.realpath(__file__))
+unigrams = os.path.join(path, "..", "unigrams.txt")
+bigrams = os.path.join(path, "..", "bigrams.txt")
 
 # Bookwormdir is defined in the call.
 

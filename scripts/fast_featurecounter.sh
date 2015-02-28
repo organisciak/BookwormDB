@@ -11,7 +11,7 @@ blocksize=$3
 outfile=files/texts/wordlist/wordlist.txt
 
 mkdir -p $tmpdir
-zcat $infile |\
+cat $infile |\
 parallel --block $blocksize -j95% --pipe --files --tempdir $tmpdir \
 	'awk {print\ \$2\,\ \$3} | sort | awk -f scripts/mergecounted.awk' >tmp1files.txt
 
