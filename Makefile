@@ -33,7 +33,7 @@ bookworm.cnf:
 files/targets: 
 	mkdir -p files/texts/encoded/{unigrams,bigrams,trigrams,completed}
 	mkdir -p files/texts/{textids,wordlist}
-	mkdir -p files/targets
+	mkdir -p files/{targets,metadata}
 
 #A "make clean" removes most things created by the bookworm,
 #but keeps the database and the registry of text and wordids
@@ -44,21 +44,24 @@ clean:
 	rm -rf files/texts/encoded/*/*
 	rm -rf files/targets
 	rm -f files/metadata/catalog.txt
+	rm -f files/metadata/jsoncatalog.txt
 	rm -f files/metadata/jsoncatalog_derived.txt
 	rm -f files/metadata/field_descriptions_derived.json
-	rm -f files/targets/input	
 	
 # Make 'pristine' is a little more aggressive
 # This can be dangerous, but lets you really wipe the slate.
 
 pristine: clean
 	-mysql -e "DROP DATABASE $(bookwormName)"
+	rm -f files/targets/input	
 	rm -rf files/texts/textids
 	rm -rf files/texts/wordlist/*
 
 # For HTRC, to process feature files beforehand. 
 files/targets/input: files/targets
-	find $(featureDirectory) -name "*json.bz2" | parallel -j90% -n10 python scripts/htrc_featurecount_stream.py {} | gzip -c >$(inputFile)
+	date
+	# find $(featureDirectory) -name "*json.bz2" | head -n 10000 | parallel -j90% -n10 python scripts/htrc_featurecount_stream.py {} | gzip -c >$(inputFile)
+	#find $(featureDirectory) -name "*json.bz2" | parallel -j90% -n10 python scripts/htrc_featurecount_stream.py {} >unigrams.txt
 	touch $@
 
 # The wordlist is an encoding scheme for words: it tokenizes in parallel, and should
@@ -67,10 +70,18 @@ files/targets/input: files/targets
 # The easiest thing to do, of course, is simply use an Ngrams or other wordlist.
 
 files/texts/wordlist/wordlist.txt:
-	scripts/fast_featurecounter.sh $(inputFile) /data/datasets/htrc-feat-extract/tmp1/ $(blockSize)
+	date
+	#scripts/fast_featurecounter.sh $(inputFile) /data/datasets/htrc-feat-extract/tmp1/ $(blockSize)
+	scripts/fast_featurecounter.sh unigrams.txt /data/datasets/htrc-feat-extract/tmp1/ $(blockSize)
+	date
 
 # This invokes OneClick on the metadata file to create a more useful internal version
 # (with parsed dates) and to create a lookup file for textids in files/texts/textids
+
+files/metadata/jsoncatalog.txt:
+	date
+	find $(featureDirectory) -name "*.json.bz2" | parallel -n 10 python scripts/htrc_makeJSONcatalog.py {} >files/metadata/jsoncatalog.txt
+	date
 
 files/metadata/jsoncatalog_derived.txt: files/metadata/jsoncatalog.txt
 #Run through parallel as well.
@@ -80,7 +91,9 @@ files/metadata/jsoncatalog_derived.txt: files/metadata/jsoncatalog.txt
 # In addition to building files for ingest.
 
 files/metadata/catalog.txt:
+	date
 	python OneClick.py preDatabaseMetadata
+	date
 
 # This is the penultimate step: creating a bunch of tsv files 
 # (one for each binary blob) with 3-byte integers for the text
@@ -99,10 +112,13 @@ files/targets/encoded: files/texts/wordlist/wordlist.txt
 #builds up the encoded lists that don't exist yet.
 #I "Make" the catalog files rather than declaring dependency so that changes to 
 #the catalog don't trigger a db rebuild automatically.
+	date
 	make files/metadata/jsoncatalog_derived.txt
 	make files/texts/textids.dbm
 	make files/metadata/catalog.txt
-	$(textStream) | parallel --block-size $(blockSize) -u --pipe python bookworm/tokenizer.py
+	#$(textStream) | parallel --block-size $(blockSize) -u --pipe bookworm/tokenizer.py
+	python bookworm/ingestFeatureCounts.py encode
+	date
 	touch files/targets/encoded
 
 # The database is the last piece to be built: this invocation of OneClick.py
@@ -110,17 +126,25 @@ files/targets/encoded: files/texts/wordlist/wordlist.txt
 # It also throws out a few other useful files at the end into files/
 
 files/targets/database: files/targets/database_wordcounts files/targets/database_metadata 
+	date
 	touch $@
+	date
 
 files/texts/textids.dbm: files/texts/textids files/metadata/jsoncatalog_derived.txt files/metadata/catalog.txt
+	date
 	python bookworm/makeWordIdDBM.py
+	date
 
 files/targets/database_metadata: files/targets/encoded files/texts/wordlist/wordlist.txt files/targets/database_wordcounts files/metadata/jsoncatalog_derived.txt files/metadata/catalog.txt 
+	date
 	python OneClick.py database_metadata
+	date
 	touch $@
 
 files/targets/database_wordcounts: files/targets/encoded files/texts/wordlist/wordlist.txt
+	date
 	python OneClick.py database_wordcounts
+	date
 	touch $@
 
 # the bookworm json is created as a sideeffect of the database creation: this just makes that explicit for the webdirectory target.
