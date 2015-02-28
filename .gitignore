@@ -33,3 +33,5 @@ tmp.cron tmp.tsv tmp.txt
 tmp.txt
 .#*
 
+*.swp
+*.err
