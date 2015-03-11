@@ -117,7 +117,7 @@ files/targets/encoded: files/texts/wordlist/wordlist.txt
 	make files/texts/textids.dbm
 	make files/metadata/catalog.txt
 	#$(textStream) | parallel --block-size $(blockSize) -u --pipe bookworm/tokenizer.py
-	python bookworm/ingestFeatureCounts.py encode
+	cat unigrams.txt | parallel --block-size $(blockSize) -u --pipe python bookworm/ingestFeatureCounts.py encode --log-level debug
 	date
 	touch files/targets/encoded
 
