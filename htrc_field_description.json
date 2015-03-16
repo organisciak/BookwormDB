@@ -1,11 +1,16 @@
 [
-	{ "field":"title", "datatype":"etc", "type":"text", "unique": true },
-	{ "field":"genre", "datatype":"categorical", "type":"character", "unique": false },
-	{ "field":"year", "datatype":"time", "type":"character", "unique": true, "derived" : [
-		{"resolution":"year"}
-	]},
-	{ "field":"oclc", "datatype":"etc", "type":"character", "unique": true },
-	{ "field":"language", "datatype":"categorical", "type":"character", "unique": false },
-	{ "field":"pageCount", "datatype":"etc", "type":"integer", "unique": false },
-	{ "field":"searchstring", "datatype":"searchstring", "type":"text", "unique": true }
+    {"datatype":"time","field":"date","type":"integer","unique":true,"derived":[{"resolution":"year"}]},
+    {"datatype":"searchstring","field":"searchstring","type":"text","unique":true},
+    {"datatype":"categorical","field":"lc_class","unique":false,"type":"text"},
+    {"datatype":"categorical","field":"lc_subclass","unique":false,"type":"text"},
+    {"datatype":"categorical","field":"fiction_nonfiction","unique":true,"type":"text"},
+    {"datatype":"categorical","field":"genre","unique":false,"type":"text"},
+    {"datatype":"categorical","field":"language","unique":false,"type":"text"},
+    {"datatype":"categorical","field":"is_gov_doc","unique":true,"type":"text"},
+    {"datatype":"categorical","field":"page_count_bin","unique":true,"type":"text"},
+    {"datatype":"categorical","field":"word_count_bin","unique":true,"type":"text"},
+    {"datatype":"categorical","field":"publication_country","unique":true,"type":"text"},
+    {"datatype":"categorical","field":"publication_state","unique":true,"type":"text"},
+    {"datatype":"categorical","field":"publication_place","unique":true,"type":"text"},
+    {"datatype":"categorical","field":"publication_format","unique":true,"type":"text"}
 ]
