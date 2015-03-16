@@ -32,13 +32,13 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('path', nargs='+')
     args = parser.parse_args()
-    logging.basicConfig(level=logging.DEBUG)
+    logging.basicConfig(filename="featurecount.log", level=logging.DEBUG)
     for path in args.path:
         filename = os.path.basename(path).split(".basic.json")[0]
         pages = load_pages(path)
         df = get_feature_df(pages, filename)
         try:
-            volume_level_counts = df.groupby(['filename', 'token']).count().loc[:,"freq"]
+            volume_level_counts = df.groupby(['filename', 'token']).sum().loc[:,"freq"]
             volume_level_counts.to_csv(sys.stdout, sep="\t", encoding='utf-8')
         except Exception, e:
             logging.debug(df)
