@@ -35,7 +35,11 @@ def main():
     logging.basicConfig(filename="featurecount.log", level=logging.DEBUG)
     for path in args.path:
         filename = os.path.basename(path).split(".basic.json")[0]
-        pages = load_pages(path)
+        try:
+            pages = load_pages(path)
+        except Exception, e:
+            logging.exception("Error loading %s" % path)
+
         df = get_feature_df(pages, filename)
         try:
             volume_level_counts = df.groupby(['filename', 'token']).sum().loc[:,"freq"]
