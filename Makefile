@@ -31,9 +31,11 @@ bookworm.cnf:
 
 #These are all directories that need to be in place for the other scripts to work properly
 files/targets: 
-	mkdir -p files/texts/encoded/{unigrams,bigrams,trigrams,completed}
-	mkdir -p files/texts/{textids,wordlist}
-	mkdir -p files/{targets,metadata}
+	echo "-building needed directories"
+	@mkdir -p files/texts
+	@mkdir -p files/texts/encoded/{unigrams,bigrams,trigrams,completed}
+	@mkdir -p files/texts/{textids,wordlist}
+	@mkdir -p files/targets
 
 #A "make clean" removes most things created by the bookworm,
 #but keeps the database and the registry of text and wordids
@@ -83,7 +85,7 @@ files/metadata/jsoncatalog.txt:
 	find $(featureDirectory) -name "*.json.bz2" | parallel -n 10 python scripts/htrc_makeJSONcatalog.py {} >files/metadata/jsoncatalog.txt
 	date
 
-files/metadata/jsoncatalog_derived.txt: files/metadata/jsoncatalog.txt
+files/metadata/jsoncatalog_derived.txt: files/metadata/jsoncatalog.txt files/metadata/field_descriptions.json
 #Run through parallel as well.
 	cat files/metadata/jsoncatalog.txt | parallel --pipe python bookworm/MetaParser.py > $@
 
