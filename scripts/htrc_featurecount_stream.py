@@ -20,7 +20,8 @@ def get_feature_df(pages, filename):
     df_inputlist = []
     for page in pages:
         seq = page['seq']
-        tokens = page['body']['tokens']
+	tokens = page['body']['tokenPosCount']
+        #OLD FORMAT: tokens = page['body']['tokens']
         for (token, poscounts) in tokens.items():
             for pos, count in poscounts.items():
                 df_inputlist += [{"filename": filename, "seq":seq, "token": token, "pos": pos, "freq": count}]
@@ -33,7 +34,7 @@ def main():
     args = parser.parse_args()
     logging.basicConfig(level=logging.DEBUG)
     for path in args.path:
-        filename = os.path.basename(path).split(".json")[0]
+        filename = os.path.basename(path).split(".basic.json")[0]
         pages = load_pages(path)
         df = get_feature_df(pages, filename)
         try:
