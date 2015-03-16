@@ -1,27 +1,47 @@
 '''
 Write token counts in the form "id   unigram   count" per volume in the HTRC feature extraction dataset.
 '''
-
-from htrc_features import FeatureReader
-import csv
 import os
 import argparse
 import logging
+import pandas as pd
+import bz2
+import ujson as json
+import sys
+
+def load_pages(path):
+    f = bz2.BZ2File(path)
+    rawjson = f.readline()
+    voljson = json.loads(rawjson)
+    pages = voljson['features']['pages']
+    return pages
+    
+def get_feature_df(pages, filename):
+    df_inputlist = []
+    for page in pages:
+        seq = page['seq']
+        tokens = page['body']['tokens']
+        for (token, poscounts) in tokens.items():
+            for pos, count in poscounts.items():
+                df_inputlist += [{"filename": filename, "seq":seq, "token": token, "pos": pos, "freq": count}]
+    df = pd.DataFrame(df_inputlist)
+    return df
 
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('path', nargs='+')
     args = parser.parse_args()
-    fr = FeatureReader(args.path)
-    for vol in fr:
-        if not vol:
-            print "Empty file"
-            continue
+    logging.basicConfig(level=logging.DEBUG)
+    for path in args.path:
+        filename = os.path.basename(path).split(".json")[0]
+        pages = load_pages(path)
+        df = get_feature_df(pages, filename)
         try:
-            for term, count in vol.term_volume_freqs(case=True).iteritems():
-                print "%s\t%s\t%i" % (vol.id.encode('utf-8'), term.encode('utf-8'), count)
+            volume_level_counts = df.groupby(['filename', 'token']).count().loc[:,"freq"]
+            volume_level_counts.to_csv(sys.stdout, sep="\t", encoding='utf-8')
         except Exception, e:
-            logging.exception(e)
+            logging.debug(df)
+            logging.exception("problem while parsing %s" % filename)
 
 
 if __name__=='__main__':
