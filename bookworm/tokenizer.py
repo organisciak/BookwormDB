@@ -84,7 +84,7 @@ class tokenBatches(object):
             try:
                 tokens = tokenizer(parts[1])
             except IndexError:
-                sys.stderr.write("\nFound no tab in the input for '" + filename + "'...skipping row\n")
+                logging.warn("\nFound no tab in the input for '" + filename + "'...skipping row\n")
             
         if source=="countfile":
             try:
@@ -97,10 +97,12 @@ class tokenBatches(object):
         try:
             textid = IDfile[filename]
         except KeyError:
-            try:
-                sys.stderr.write("Warning: file " + filename + " not found in jsoncatalog.txt, not encoding\n")
+            pass
+            '''try:
+                pass
+                #logging.warn("file " + filename + " not found in jsoncatalog.txt, not encoding\n")
             except:
-                "something went wrong"
+                "something went wrong"'''
             return
 
 
@@ -127,7 +129,10 @@ class tokenBatches(object):
                     wordids = "\t".join(wordList)
                     output.append("\t".join([textid,wordids,str(count)]))
 
-            outputFile.write("\n".join(output) + "\n")        
+            try:
+                outputFile.write("\n".join(output) + "\n")        
+            except IOError, e:
+                logging.exception(e)
 
         if write_completed:
             self.completedFile.write(filename + "\n")
