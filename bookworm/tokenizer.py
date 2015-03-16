@@ -97,10 +97,10 @@ class tokenBatches(object):
         try:
             textid = IDfile[filename]
         except KeyError:
-            try:
+            '''try:
                 sys.stderr.write("Warning: file " + filename + " not found in jsoncatalog.txt, not encoding\n")
             except:
-                "something went wrong"
+                "something went wrong"'''
             return
 
 
