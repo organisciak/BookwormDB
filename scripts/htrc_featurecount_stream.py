@@ -14,6 +14,7 @@ def load_pages(path):
     rawjson = f.readline()
     voljson = json.loads(rawjson)
     pages = voljson['features']['pages']
+    f.close()
     return pages
     
 def get_feature_df(pages, filename):
@@ -31,16 +32,23 @@ def get_feature_df(pages, filename):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('path', nargs='+')
+    parser.add_argument('--logpath', '-l', type=str, help='Location for the logfile', default="featurereader.log")
+    args = parser.parse_args()
+    logging.basicConfig(filename=args.logpath, level=logging.DEBUG)
     args = parser.parse_args()
     logging.basicConfig(filename="featurecount.log", level=logging.DEBUG)
     for path in args.path:
         filename = os.path.basename(path).split(".basic.json")[0]
         try:
             pages = load_pages(path)
+            df = get_feature_df(pages, filename)
         except Exception, e:
             logging.exception("Error loading %s" % path)
-
-        df = get_feature_df(pages, filename)
+            continue
+        
+        if len(df) == 0:
+            logging.info("%s does not seem to have any data" % path)
+            continue
         try:
             volume_level_counts = df.groupby(['filename', 'token']).sum().loc[:,"freq"]
             volume_level_counts.to_csv(sys.stdout, sep="\t", encoding='utf-8')
