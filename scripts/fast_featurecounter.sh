@@ -21,6 +21,6 @@ parallel --block $blocksize -j95% --pipe --files --tempdir $tmpdir \
 cat tmp1files.txt | parallel --files --tempdir $tmpdir -Xn30 -j95% \
 	sort -m {} "|" awk -f scripts/mergecounted.awk ";" rm {} |\
 	parallel -Xj1 sort -m {} "|" awk -f $DIR/mergecounted.awk ";" rm {} |\
-	sort -n -r -k2 | awk 'BEGIN {i=0}{i+=1;print i "	" $1 "	" $2}' #>$outfile # Format for bw
+	sort -n -r -k2 | awk 'BEGIN {i=0}{i+=1;print i "	" $1 "	" $2}' >$outfile # Format for bw
 
 rm tmp1files.txt
