@@ -97,13 +97,13 @@ class tokenBatches(object):
         try:
             textid = IDfile[filename]
         except KeyError:
-            '''try:
-                sys.stderr.write("Warning: file " + filename + " not found in jsoncatalog.txt, not encoding\n")
-            except:
-                "something went wrong"'''
+            if source=="raw_text":
+                logging.exception("Warning: file " + filename + " not found in jsoncatalog.txt, not encoding")
+            elif source=="countfile":
+                # Silent error currently, so that we don't warn for each term
+                # of each missing file
+                pass
             return
-
-
 
         for level in self.levels:
             outputFile = self.outputFiles[level]
