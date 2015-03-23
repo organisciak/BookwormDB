@@ -72,10 +72,7 @@ files/targets/input: files/targets
 # The easiest thing to do, of course, is simply use an Ngrams or other wordlist.
 
 files/texts/wordlist/wordlist.txt:
-	date
-	#scripts/fast_featurecounter.sh $(inputFile) /data/datasets/htrc-feat-extract/tmp1/ $(blockSize)
-	scripts/fast_featurecounter.sh unigrams.txt /data/datasets/htrc-feat-extract/tmp1/ $(blockSize)
-	date
+	scripts/fast_featurecounter.sh unigrams.txt /data/datasets/htrc-feat-extract/tmp1/ $(blockSize) $@
 
 # This invokes OneClick on the metadata file to create a more useful internal version
 # (with parsed dates) and to create a lookup file for textids in files/texts/textids
@@ -114,13 +111,11 @@ files/targets/encoded: files/texts/wordlist/wordlist.txt
 #builds up the encoded lists that don't exist yet.
 #I "Make" the catalog files rather than declaring dependency so that changes to 
 #the catalog don't trigger a db rebuild automatically.
-	date
 	make files/metadata/jsoncatalog_derived.txt
 	make files/texts/textids.dbm
 	make files/metadata/catalog.txt
 	#$(textStream) | parallel --block-size $(blockSize) -u --pipe bookworm/tokenizer.py
 	cat unigrams.txt | parallel --block-size $(blockSize) -u --pipe python bookworm/ingestFeatureCounts.py encode --log-level debug
-	date
 	touch files/targets/encoded
 
 # The database is the last piece to be built: this invocation of OneClick.py
